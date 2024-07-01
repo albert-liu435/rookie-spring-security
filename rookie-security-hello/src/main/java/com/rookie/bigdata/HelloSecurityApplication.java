@@ -29,7 +29,7 @@ public class HelloSecurityApplication {
 //HttpSecurityConfiguration
 //WebMvcSecurityConfiguration
 //WebSecurityConfiguration
-//        SpringBootWebSecurityConfiguration
+//入口：        SpringBootWebSecurityConfiguration#WebSecurityEnablerConfiguration
 
         //UserDetailsServiceAutoConfiguration
         SpringApplication.run(HelloSecurityApplication.class, args);
