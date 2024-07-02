@@ -1,11 +1,11 @@
 package com.rookie.bigdata.runner;
 
-import com.rookie.bigdata.event.MySmartApplicationListener;
+import com.rookie.bigdata.event.AbstractAuthenticationEventListener;
+import com.rookie.bigdata.event.AuthenticationSuccessEventListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.event.GenericApplicationListenerAdapter;
-import org.springframework.context.event.SmartApplicationListener;
+
 import org.springframework.security.context.DelegatingApplicationListener;
 import org.springframework.stereotype.Component;
 
@@ -18,16 +18,18 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class MyCommandLineRunner implements CommandLineRunner {
+public class CommonLineRunner implements CommandLineRunner {
 
+    //与之对应的为DefaultAuthenticationEventPublisher
     @Autowired
     private DelegatingApplicationListener delegatingApplicationListener;
 
     @Override
     public void run(String... args) throws Exception {
 
-
-        delegatingApplicationListener.addListener(new MySmartApplicationListener());
+        //添加监听器
+        delegatingApplicationListener.addListener(new AuthenticationSuccessEventListener());
+        delegatingApplicationListener.addListener(new AbstractAuthenticationEventListener());
 
         log.info("启动任务：{} ", args);
     }
