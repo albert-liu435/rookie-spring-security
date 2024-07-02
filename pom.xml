@@ -11,6 +11,7 @@
     <modules>
         <module>rookie-security-hello</module>
         <module>rookie-security-username-password</module>
+        <module>rookie-security-rabc</module>
     </modules>
 
     <properties>
