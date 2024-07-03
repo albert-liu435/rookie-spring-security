@@ -1,0 +1,43 @@
+InitializeUserDetailsBeanManagerConfigurer为三大全局配置之一，另外两个分别为InitializeAuthenticationProviderBeanManagerConfigurer和EnableGlobalAuthenticationAutowiredConfigurer
+
+
+
+1、InitializeUserDetailsBeanManagerConfigurer的初始化过程在AuthenticationConfiguration中，首先创建InitializeUserDetailsBeanManagerConfigurer
+	@Bean
+	public static InitializeUserDetailsBeanManagerConfigurer initializeUserDetailsBeanManagerConfigurer(
+			ApplicationContext context) {
+		return new InitializeUserDetailsBeanManagerConfigurer(context);
+	}
+并将其注入到	private List<GlobalAuthenticationConfigurerAdapter> globalAuthConfigurers = Collections.emptyList();并在初始化org.springframework.security.config.annotation.web.configuration。HttpSecurityConfiguration#httpSecurity()的时候调用authenticationManager()并通过调用org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration#getAuthenticationManager()方法进行后续处理
+
+2、getAuthenticationManager()方法
+通过获取AuthenticationManagerBuilder,AuthenticationManagerBuilder的创建默认是在org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
+	@Bean
+	public AuthenticationManagerBuilder authenticationManagerBuilder(ObjectPostProcessor<Object> objectPostProcessor,
+			ApplicationContext context) {
+		LazyPasswordEncoder defaultPasswordEncoder = new LazyPasswordEncoder(context);
+		AuthenticationEventPublisher authenticationEventPublisher = getAuthenticationEventPublisher(context);
+		DefaultPasswordEncoderAuthenticationManagerBuilder result = new DefaultPasswordEncoderAuthenticationManagerBuilder(
+				objectPostProcessor, defaultPasswordEncoder);
+		if (authenticationEventPublisher != null) {
+			result.authenticationEventPublisher(authenticationEventPublisher);
+		}
+		return result;
+	}
+进行创建AuthenticationManagerBuilder，默认为DefaultPasswordEncoderAuthenticationManagerBuilder,并通过authBuilder.apply(config)将三大全局配置InitializeUserDetailsBeanManagerConfigurer,InitializeAuthenticationProviderBeanManagerConfigurer和EnableGlobalAuthenticationAutowiredConfigurer加入到AuthenticationManagerBuilder，然后通过AuthenticationManagerBuilder的doBuild()方法进行构建，紧接着调用org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder#init()方法，最终会调用InitializeUserDetailsBeanManagerConfigurer#init()方法将InitializeUserDetailsManagerConfigurer加入进去，后续调用AbstractConfiguredSecurityBuilder#configure()方法
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

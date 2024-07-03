@@ -21,6 +21,4 @@ https://baijiahao.baidu.com/s?id=1737289611551294394&wfr=spider&for=pc
 
 
 
-DelegatingApplicationListener
-
-DefaultAuthenticationEventPublisher
+最小配置启动的时候运行包括 SpringBootWebSecurityConfiguration, SpringWebMvcImportSelector,WebMvcSecurityConfiguration,SecurityFilterAutoConfiguration,AuthenticationConfiguration,SecurityAutoConfiguration,HttpSecurityConfiguration,WebSecurityConfiguration
