@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IndexController {
 
+    /**
+     * localhost:8888/hello
+     * Basic Auth认证， user:password
+     * @return
+     */
     @GetMapping("/")
     public String index() {
 
