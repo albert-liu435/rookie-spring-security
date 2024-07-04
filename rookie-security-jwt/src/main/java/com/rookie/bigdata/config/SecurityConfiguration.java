@@ -37,20 +37,6 @@ public class SecurityConfiguration {
         this.tokenAuthenticateFilter = tokenAuthenticateFilter;
     }
 
-        @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.sessionManagement()
-                // 设置 session 为无状态，因为基于 token 不需要 session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .sessionFixation().none()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/getToken/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .csrf().disable()
-                .addFilterBefore(tokenAuthenticateFilter, UsernamePasswordAuthenticationFilter.class);
-    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
