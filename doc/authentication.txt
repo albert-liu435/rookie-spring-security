@@ -1,0 +1,10 @@
+身份验证机制
+SecurityContextHolder:是Spring Security 存储经过身份验证的SecurityContextHolder人员的详细信息的地方。
+SecurityContext:从中​​获得SecurityContextHolder并包含Authentication当前经过身份验证的用户的。
+Authentication:—可以是输入，以AuthenticationManager提供用户提供的用于身份验证的凭据或当前用户的凭据SecurityContext。
+GrantedAuthority:授予主体的权限Authentication（即角色、范围等）
+AuthenticationManager:定义 Spring Security 的过滤器如何执行身份验证的API 。
+ProviderManager——最常见的实现AuthenticationManager。
+AuthenticationProvider - 用于ProviderManager执行特定类型的身份验证。
+请求凭证AuthenticationEntryPoint- 用于从客户端请求凭证（即重定向到登录页面、发送响应WWW-Authenticate等）
+AbstractAuthenticationProcessingFilter - 用于身份验证的基础Filter。这也很好地说明了身份验证的高级流程以及各部分如何协同工作

@@ -1,0 +1,35 @@
+https://cloud.tencent.com/developer/article/1818173
+
+DebugFilter
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextHolderFilter
+  HeaderWriterFilter
+  CorsFilter
+  CsrfFilter
+  LogoutFilter
+  UsernamePasswordAuthenticationFilter
+  DefaultLoginPageGeneratingFilter
+  DefaultLogoutPageGeneratingFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+#DebugFilter
+
+org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration#setImportMetadata()将debugEnabled设置为true
+
+springSecurityFilterChain
+
+springSecurityFilterChain即为DebugFilter实例
+
+CompositeFilterChainProxy
+
+BeanDefinitionRegistryPostProcessor

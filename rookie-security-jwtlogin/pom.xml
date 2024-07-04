@@ -11,10 +11,10 @@
     </parent>
     <packaging>jar</packaging>
     <groupId>com.rookie.bigdata</groupId>
-    <artifactId>rookie-security-explicits</artifactId>
+    <artifactId>rookie-security-jwtlogin</artifactId>
     <version>1.0.0</version>
 
-    <name>rookie-security-explicits</name>
+    <name>rookie-security-jwtlogin</name>
     <!--  change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -27,15 +27,15 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -45,10 +45,6 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.seleniumhq.selenium</groupId>-->
-<!--            <artifactId>htmlunit-driver</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
