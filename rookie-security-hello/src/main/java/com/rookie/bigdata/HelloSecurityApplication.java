@@ -29,16 +29,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class HelloSecurityApplication extends SpringBootServletInitializer implements CommandLineRunner {
 
     public static void main(String[] args) {
-//org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
-//org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
-//org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration
-//
-//HttpSecurityConfiguration
-//WebMvcSecurityConfiguration
-//WebSecurityConfiguration
-//入口：        SpringBootWebSecurityConfiguration#WebSecurityEnablerConfiguration
 
-        //UserDetailsServiceAutoConfiguration
         SpringApplication.run(HelloSecurityApplication.class, args);
     }
 

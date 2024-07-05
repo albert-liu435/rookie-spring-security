@@ -1,0 +1,8 @@
+SecurityContext
+记住这个类是贯穿整个过滤器链的，后续一系列的认证授权都是围绕它展开的。它的实现类只有一个SecurityContextImpl，这个类从名字上可以看出它代表的是安全上下文信息，看一下SecurityContextImpl类：
+内部结构很简单，只包含了一个Authentication，代表的是认证信息。
+
+
+
+
+https://www.zyc.red/Spring/Security/Spring-Security%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/Spring-Security%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/

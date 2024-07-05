@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <modules>
-
+        <module>rookie-security-authentication</module>
         <module>rookie-security-explicits</module>
         <module>rookie-security-hello</module>
         <module>rookie-security-jwt</module>

@@ -1,3 +1,21 @@
+Authentication
+它的含义可以理解成“认证信息”，也就是说从请求开始，这个认证信息可能是没有被认证的，到请求结束可能已经变成已认证了。它的状态是会变化的
+
+
+常用的认证令牌有以上几种（省略的其它几种令牌），它们都继承了AbstractAuthenticationToken类，因此它们都是属于认证令牌。仔细对比这四个类可以发现它们都拥有2个构造函数，并且AnonymousAuthenticationToken和RememberMeAuthenticationToken的2个构造函数最终都调用了setAuthenticated(true)方法将当前主体设置为已认证了，而UsernamePasswordAuthenticationToken和PreAuthenticatedAuthenticationToken的第一个构造函数都把authenticated设置成了false，第二个构造函数将authenticated设置成了true。其实这四种令牌是属于两种类型的令牌：
+
+第一类：
+AnonymousAuthenticationToken
+RememberMeAuthenticationToken
+这一类令牌spring-security认为这是属于已认证的令牌（例如某论坛的帖子是可以匿名查看的，对应的接口就是可以匿名访问的，此时整个请求流程中的Authentication就是AnonymousAuthenticationToken）
+
+第二类：
+
+PreAuthenticatedAuthenticationToken
+UsernamePasswordAuthenticationToken
+这一类令牌是在进行认证时需要用到的令牌信息（例如，用户使用用户名和密码登录时，就会根据用户名和密码生成一个令牌，此时整个请求流程中的Authentication就是UsernamePasswordAuthenticationToken）
+
+
 身份验证机制
 SecurityContextHolder:是Spring Security 存储经过身份验证的SecurityContextHolder人员的详细信息的地方。
 SecurityContext:从中​​获得SecurityContextHolder并包含Authentication当前经过身份验证的用户的。
@@ -8,3 +26,11 @@ ProviderManager——最常见的实现AuthenticationManager。
 AuthenticationProvider - 用于ProviderManager执行特定类型的身份验证。
 请求凭证AuthenticationEntryPoint- 用于从客户端请求凭证（即重定向到登录页面、发送响应WWW-Authenticate等）
 AbstractAuthenticationProcessingFilter - 用于身份验证的基础Filter。这也很好地说明了身份验证的高级流程以及各部分如何协同工作
+
+
+
+
+
+
+
+https://www.zyc.red/Spring/Security/Spring-Security%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/Spring-Security%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/#%E6%A6%82%E8%BF%B0

@@ -17,16 +17,16 @@ import java.util.Arrays;
  * @Version 1.0
  */
 @SpringBootApplication
-public class ExplicitsSecurityApplication extends SpringBootServletInitializer implements CommandLineRunner {
+public class AuthenticationSecurityApplication extends SpringBootServletInitializer implements CommandLineRunner {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(ExplicitsSecurityApplication.class, args);
+        SpringApplication.run(AuthenticationSecurityApplication.class, args);
     }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(ExplicitsSecurityApplication.class);
+        return application.sources(AuthenticationSecurityApplication.class);
     }
 
     @Autowired

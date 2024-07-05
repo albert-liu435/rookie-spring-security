@@ -1,0 +1,7 @@
+SecurityContextPersistenceFilter已经废弃，可以看SecurityContextHolderFilter
+
+SecurityContextPersistenceFilter在整个过滤器链中排在了第二的位置，由此可见该过滤器的重要性，并且从该过滤器的名字大概可以看出它主要作用是持久化SecurityContext（安全上下文信息），即将整个安全相关的信息保存起来，这样下游的其它过滤器就可以使用这个安全信息进行相关的操作了。
+
+
+
+https://www.zyc.red/Spring/Security/Spring-Security%E6%A0%B8%E5%BF%83%E8%BF%87%E6%BB%A4%E5%99%A8/SecurityContextPersistenceFilter/
