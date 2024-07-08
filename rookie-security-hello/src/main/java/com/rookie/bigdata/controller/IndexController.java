@@ -1,5 +1,7 @@
 package com.rookie.bigdata.controller;
 
+import org.springframework.security.config.annotation.SecurityBuilder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
