@@ -11,6 +11,7 @@
     <modules>
         <module>rookie-security-authentication</module>
         <module>rookie-security-explicits</module>
+        <module>rookie-security-filter</module>
         <module>rookie-security-hello</module>
         <module>rookie-security-jwt</module>
         <module>rookie-security-jwtlogin</module>
