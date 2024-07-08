@@ -14,6 +14,7 @@
         <module>rookie-security-hello</module>
         <module>rookie-security-jwt</module>
         <module>rookie-security-jwtlogin</module>
+        <module>rookie-security-multichain</module>
         <module>rookie-security-username-password</module>
         <module>rookie-security-rabc</module>
     </modules>
