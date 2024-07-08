@@ -34,3 +34,4 @@ AbstractAuthenticationProcessingFilter - 用于身份验证的基础Filter。这
 
 
 https://www.zyc.red/Spring/Security/Spring-Security%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/Spring-Security%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/#%E6%A6%82%E8%BF%B0
+https://www.zyc.red/Spring/Security/Spring-Security%E6%A0%B8%E5%BF%83%E8%BF%87%E6%BB%A4%E5%99%A8/AuthenticationManager/

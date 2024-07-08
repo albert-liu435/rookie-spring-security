@@ -1,0 +1,6 @@
+spring-security为了使整个认证流程中的SecurityContext中始终存在一个Authentication信息，在过滤器链的认证阶段尾部填充了一个名为AnonymousAuthenticationFilter的过滤器，该过滤的主要作用是当认证阶段结束后，检测SecurityContextHolder中是否存在Authentication对象，如果不存在则用一个匿名的认证令牌填充进去。
+
+
+AnonymousAuthenticationFilter的源码很简单，当请求走到这个过滤器的时候，如果之前的一些认证过滤器没有往SecurityContext中填充认证令牌，就会填充一个匿名令牌到其中。此时当前请求的用户就是匿名用户。
+
+https://www.zyc.red/Spring/Security/Spring-Security%E6%A0%B8%E5%BF%83%E8%BF%87%E6%BB%A4%E5%99%A8/AnonymousAuthenticationFilter/

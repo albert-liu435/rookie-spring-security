@@ -1,0 +1,8 @@
+AccessDecisionManager用AuthorizationManager替代
+AccessDecisionManager访问决策管理器，制定最终访问控制（授权）决策。它的实现类有以下三种
+
+
+
+
+
+https://www.zyc.red/Spring/Security/Spring-Security%E6%A0%B8%E5%BF%83%E8%BF%87%E6%BB%A4%E5%99%A8/AccessDecisionManager/

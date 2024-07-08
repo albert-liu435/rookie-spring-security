@@ -11,6 +11,9 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -25,10 +28,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity(debug = true)
 public class SecurityConfiguration {
-//    @Configuration
-//    @EnableWebSecurity
-//    @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-//    public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final TokenAuthenticateFilter tokenAuthenticateFilter;
 
@@ -40,18 +39,6 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-//        @Bean
-//        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//            http
-//                    .authorizeHttpRequests((authorizeHttpRequests) ->
-//                            authorizeHttpRequests
-//                                    .requestMatchers("/admin/**").hasRole("ADMIN")
-//                                    .requestMatchers("/**").hasRole("USER")
-//                    )
-//                    .formLogin(withDefaults());
-//            return http.build();
-//        }
 
 
         http.authorizeHttpRequests((authorizeHttpRequests) ->
@@ -66,54 +53,16 @@ public class SecurityConfiguration {
 
     }
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//
-////        http.sessionManagement()
-////                // 设置 session 为无状态，因为基于 token 不需要 session
-////                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-////                .sessionFixation().none()
-////                .and()
-////                .authorizeRequests()
-////                .antMatchers("/getToken/**").permitAll()
-////                .anyRequest().authenticated()
-////                .and()
-////                .csrf().disable()
-////                .addFilterBefore(tokenAuthenticateFilter, UsernamePasswordAuthenticationFilter.class);
-//        // @formatter:off
-////        http
-////                .authorizeHttpRequests((authorize) -> authorize
-////                        .anyRequest().authenticated()
-////                )
-////                .csrf((csrf) -> csrf.ignoringRequestMatchers("/token"))
-////                .httpBasic(Customizer.withDefaults())
-//////                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-//////                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt(Customizer.withDefaults()))
-////                .oauth2ResourceServer((oAuth2ResourceServerConfigurer) -> oAuth2ResourceServerConfigurer
-////                        .jwt(Customizer.withDefaults())
-////                )
-////                .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-////                .exceptionHandling((exceptions) -> exceptions
-////                        .authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
-////                        .accessDeniedHandler(new BearerTokenAccessDeniedHandler())
-////                );
-////        // @formatter:on
-////        return http.build();
-//    }
+    @Bean
+    UserDetailsService users() {
+        // @formatter:off
+        return new InMemoryUserDetailsManager(
+                User.withUsername("user")
+                        .password("{noop}password")
+                        .authorities("app")
+                        .build()
+        );
+        // @formatter:on
+    }
 
-
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.sessionManagement()
-//                // 设置 session 为无状态，因为基于 token 不需要 session
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .sessionFixation().none()
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers("/getToken/**").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .csrf().disable()
-//                .addFilterBefore(tokenAuthenticateFilter, UsernamePasswordAuthenticationFilter.class);
-//    }
 }

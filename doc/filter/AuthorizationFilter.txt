@@ -1,0 +1,22 @@
+FilterSecurityInterceptor用AuthorizationFilter代替
+
+FilterSecurityInterceptor是整个过滤器链中的最后一个过滤器，它的整个执行机制很复杂，这里我简单的描述一下的作用：它负责将之前过滤产生的认证信息从当前请求上下文中取出来，对请求的资源做权限判断，如果无权访问相应的资源，则抛出spring-security异常，由上一篇的ExceptionTranslationFilter进行处理。
+
+FilterSecurityInterceptor在进行过滤时第一步先构造一个FilterInvocation对象，然后交给父类分别在安全对象（需要保护的资源，例如某些方法需要特定的权限才能访问）调用前，调用后，和执行完毕时进行处理。下面重点分析一下父类AbstractSecurityInterceptor是如何进行处理的
+
+
+
+FilterSecurityInterceptor的整体执行逻辑已经全部解析完了，这里总结一下它的执行步骤
+
+调用父类的beforeInvocation方法，传入new FilterInvocation(request, response, chain)，然后返回结果为InterceptorStatusToken，真正的前置权限认证就在其中判断
+
+过滤器链继续往下执行，实际上就是在执行安全对象方法（就是我们自己写的配置了访问权限的方法）
+
+调用父类的finallyInvocation方法，传入第一步返回的InterceptorStatusToken，主要是根据RunAsManager是否返回结果来还原之前的认证信息
+
+调用父类的afterInvocation方法，传入第一步返回的InterceptorStatusToken，主要是对最终返回的结果进一步处理
+
+
+
+
+https://www.zyc.red/Spring/Security/Spring-Security%E6%A0%B8%E5%BF%83%E8%BF%87%E6%BB%A4%E5%99%A8/FilterSecurityInterceptor/
