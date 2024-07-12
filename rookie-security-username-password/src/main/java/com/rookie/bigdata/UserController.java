@@ -13,6 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
+    /**
+     * 请求 http://localhost:8888/user
+     * basic auth
+     * user@example.com:password
+     * @param currentUser
+     * @return
+     */
     @GetMapping("/user")
     public CustomUser user(@CurrentUser CustomUser currentUser) {
         return currentUser;
