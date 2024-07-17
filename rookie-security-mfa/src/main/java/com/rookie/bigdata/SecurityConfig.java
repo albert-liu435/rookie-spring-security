@@ -22,6 +22,7 @@ import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.AuthorizationManager;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.encrypt.AesBytesEncryptor;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.keygen.KeyGenerators;
@@ -36,6 +37,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import java.util.function.Supplier;
 
 @Configuration
 public class SecurityConfig {
@@ -70,8 +72,17 @@ public class SecurityConfig {
 
 	@Bean
 	AuthorizationManager<RequestAuthorizationContext> mfaAuthorizationManager() {
-		return (authentication,
-				context) -> new AuthorizationDecision(authentication.get() instanceof MfaAuthentication);
+
+		return new AuthorizationManager<RequestAuthorizationContext>(){
+
+			@Override
+			public AuthorizationDecision check(Supplier<Authentication> authentication, RequestAuthorizationContext object) {
+				return new AuthorizationDecision(authentication.get() instanceof MfaAuthentication);
+			}
+		};
+
+//		return (authentication,
+//				context) -> new AuthorizationDecision(authentication.get() instanceof MfaAuthentication);
 	}
 
 	// for the second-factor
