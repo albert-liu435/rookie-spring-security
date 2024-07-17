@@ -1,7 +1,0 @@
-#spring:
-#  security:
-#    user:
-#      name: user
-#      password: user
-#  main:
-#    allow-bean-definition-overriding: true

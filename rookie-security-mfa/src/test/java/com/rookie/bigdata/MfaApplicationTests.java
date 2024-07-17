@@ -4,19 +4,21 @@ import com.j256.twofactorauth.TimeBasedOneTimePasswordUtil;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.security.crypto.codec.Hex;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+
 
 /**
  * @Class MFASecurityApplicationTest
@@ -28,12 +30,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Disabled
-public class MFASecurityApplicationTest {
+public class MfaApplicationTests {
 
     private static final String hexKey = "80ed266dd80bcd32564f0f4aaa8d9b149a2b1eaa";
 
     @Autowired
     private MockMvc mockMvc;
+
+
+    @Test
+    void test01(){
+//        String hexSecret = "80ed266dd80bcd32564f0f4aaa8d9b149a2b1eaa";
+//        String encrypted = new String(Hex.encode(encryptor.encrypt(hexSecret.getBytes())));
+
+    }
 
     @Test
     void mfaWhenAllFactorsSucceedMatchesThenWorks() throws Exception {
