@@ -42,72 +42,73 @@ import java.util.function.Supplier;
 @Configuration
 public class SecurityConfig {
 
-	@Bean
-	SecurityFilterChain web(HttpSecurity http,
-			AuthorizationManager<RequestAuthorizationContext> mfaAuthorizationManager) throws Exception {
-		MfaAuthenticationHandler mfaAuthenticationHandler = new MfaAuthenticationHandler("/second-factor");
-		// @formatter:off
-		http
-			.authorizeHttpRequests((authorize) -> authorize
-				.requestMatchers("/favicon.ico").permitAll()
-				.requestMatchers("/second-factor", "/third-factor").access(mfaAuthorizationManager)
-				.anyRequest().authenticated()
-			)
-			.formLogin((form) -> form
-				.successHandler(mfaAuthenticationHandler)
-				.failureHandler(mfaAuthenticationHandler)
-			)
-			.exceptionHandling((exceptions) -> exceptions
-				.withObjectPostProcessor(new ObjectPostProcessor<ExceptionTranslationFilter>() {
-					@Override
-					public <O extends ExceptionTranslationFilter> O postProcess(O filter) {
-						filter.setAuthenticationTrustResolver(new MfaTrustResolver());
-						return filter;
-					}
-				})
-			);
-		// @formatter:on
-		return http.build();
-	}
+    @Bean
+    SecurityFilterChain web(HttpSecurity http,
+                            AuthorizationManager<RequestAuthorizationContext> mfaAuthorizationManager) throws Exception {
+        MfaAuthenticationHandler mfaAuthenticationHandler = new MfaAuthenticationHandler("/second-factor");
+        // @formatter:off
+        http
+                .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/favicon.ico").permitAll()
+                        .requestMatchers("/code").permitAll()
+                        .requestMatchers("/second-factor", "/third-factor").access(mfaAuthorizationManager)
+                        .anyRequest().authenticated()
+                )
+                .formLogin((form) -> form
+                        .successHandler(mfaAuthenticationHandler)
+                        .failureHandler(mfaAuthenticationHandler)
+                )
+                .exceptionHandling((exceptions) -> exceptions
+                        .withObjectPostProcessor(new ObjectPostProcessor<ExceptionTranslationFilter>() {
+                            @Override
+                            public <O extends ExceptionTranslationFilter> O postProcess(O filter) {
+                                filter.setAuthenticationTrustResolver(new MfaTrustResolver());
+                                return filter;
+                            }
+                        })
+                );
+        // @formatter:on
+        return http.build();
+    }
 
-	@Bean
-	AuthorizationManager<RequestAuthorizationContext> mfaAuthorizationManager() {
+    @Bean
+    AuthorizationManager<RequestAuthorizationContext> mfaAuthorizationManager() {
 
-		return new AuthorizationManager<RequestAuthorizationContext>(){
+        return new AuthorizationManager<RequestAuthorizationContext>() {
 
-			@Override
-			public AuthorizationDecision check(Supplier<Authentication> authentication, RequestAuthorizationContext object) {
-				return new AuthorizationDecision(authentication.get() instanceof MfaAuthentication);
-			}
-		};
+            @Override
+            public AuthorizationDecision check(Supplier<Authentication> authentication, RequestAuthorizationContext object) {
+                return new AuthorizationDecision(authentication.get() instanceof MfaAuthentication);
+            }
+        };
 
 //		return (authentication,
 //				context) -> new AuthorizationDecision(authentication.get() instanceof MfaAuthentication);
-	}
+    }
 
-	// for the second-factor
-	@Bean
-	AesBytesEncryptor encryptor() throws Exception {
-		KeyGenerator generator = KeyGenerator.getInstance("AES");
-		generator.init(128);
-		SecretKey key = generator.generateKey();
-		return new AesBytesEncryptor(key, KeyGenerators.secureRandom(12), AesBytesEncryptor.CipherAlgorithm.GCM);
-	}
+    // for the second-factor
+    @Bean
+    AesBytesEncryptor encryptor() throws Exception {
+        KeyGenerator generator = KeyGenerator.getInstance("AES");
+        generator.init(128);
+        SecretKey key = generator.generateKey();
+        return new AesBytesEncryptor(key, KeyGenerators.secureRandom(12), AesBytesEncryptor.CipherAlgorithm.GCM);
+    }
 
-	// for the third-factor
-	@Bean
-	PasswordEncoder encoder() {
-		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-	}
+    // for the third-factor
+    @Bean
+    PasswordEncoder encoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 
-	@Bean
-	AuthenticationSuccessHandler successHandler() {
-		return new SavedRequestAwareAuthenticationSuccessHandler();
-	}
+    @Bean
+    AuthenticationSuccessHandler successHandler() {
+        return new SavedRequestAwareAuthenticationSuccessHandler();
+    }
 
-	@Bean
-	AuthenticationFailureHandler failureHandler() {
-		return new SimpleUrlAuthenticationFailureHandler("/login?error");
-	}
+    @Bean
+    AuthenticationFailureHandler failureHandler() {
+        return new SimpleUrlAuthenticationFailureHandler("/login?error");
+    }
 
 }

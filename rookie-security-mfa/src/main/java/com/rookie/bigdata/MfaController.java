@@ -16,8 +16,10 @@
 
 package com.rookie.bigdata;
 
+import com.j256.twofactorauth.TimeBasedOneTimePasswordUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.SneakyThrows;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -64,10 +66,7 @@ public class MfaController {
 		this.failedAuthenticationSecurityAnswer = this.encoder.encode(randomValue());
 	}
 
-	@GetMapping("/aaa")
-	public String aaa() {
-		return "index";
-	}
+
 
 
 	@GetMapping("/second-factor")

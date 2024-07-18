@@ -45,8 +45,8 @@ public class TimeBasedOneTimePasswordUtilTest {
         String encrypted = new String(Hex.encode(encryptor.encrypt(hexSecret.getBytes())));
 
 
-        Integer code = TimeBasedOneTimePasswordUtil.generateCurrentNumberHex(encrypted);
-        Integer code1 =  TimeBasedOneTimePasswordUtil.generateNumberHex(encrypted, System.currentTimeMillis(), 30, DEFAULT_OTP_LENGTH);
+        Integer code1 = TimeBasedOneTimePasswordUtil.generateCurrentNumberHex(encrypted);
+//        Integer code1 =  TimeBasedOneTimePasswordUtil.generateNumberHex(encrypted, System.currentTimeMillis(), 30, DEFAULT_OTP_LENGTH);
         System.out.println(code1);
 
 //        Thread.sleep(12000);
