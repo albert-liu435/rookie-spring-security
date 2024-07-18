@@ -10,6 +10,7 @@
     <version>1.0.0</version>
     <modules>
         <module>rookie-security-authentication</module>
+        <module>rookie-security-encrypt</module>
         <module>rookie-security-explicits</module>
         <module>rookie-security-filter</module>
         <module>rookie-security-hello</module>
