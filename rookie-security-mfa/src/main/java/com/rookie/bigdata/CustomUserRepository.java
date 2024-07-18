@@ -18,6 +18,6 @@ package com.rookie.bigdata;
 
 public interface CustomUserRepository {
 
-	CustomUser findCustomUserByEmail(String email);
+    CustomUser findCustomUserByEmail(String email);
 
 }

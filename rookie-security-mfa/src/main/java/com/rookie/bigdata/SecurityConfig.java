@@ -86,6 +86,12 @@ public class SecurityConfig {
 //				context) -> new AuthorizationDecision(authentication.get() instanceof MfaAuthentication);
     }
 
+    /**
+     * AES Encryptor,用于进行加解密
+     *
+     * @return
+     * @throws Exception
+     */
     // for the second-factor
     @Bean
     AesBytesEncryptor encryptor() throws Exception {

@@ -20,56 +20,57 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
+ * 自定义用户
  * A custom user representation.
  *
  * @author Rob Winch
  */
 public class CustomUser {
 
-	private final long id;
+    private final long id;
 
-	private final String email;
+    private final String email;
 
-	@JsonIgnore
-	private final String password;
+    @JsonIgnore
+    private final String password;
 
-	@JsonIgnore
-	private final String secret;
+    @JsonIgnore
+    private final String secret;
 
-	@JsonIgnore
-	private final String answer;
+    @JsonIgnore
+    private final String answer;
 
-	@JsonCreator
-	public CustomUser(long id, String email, String password, String secret, String answer) {
-		this.id = id;
-		this.email = email;
-		this.password = password;
-		this.secret = secret;
-		this.answer = answer;
-	}
+    @JsonCreator
+    public CustomUser(long id, String email, String password, String secret, String answer) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.secret = secret;
+        this.answer = answer;
+    }
 
-	public CustomUser(CustomUser user) {
-		this(user.id, user.email, user.password, user.secret, user.answer);
-	}
+    public CustomUser(CustomUser user) {
+        this(user.id, user.email, user.password, user.secret, user.answer);
+    }
 
-	public long getId() {
-		return this.id;
-	}
+    public long getId() {
+        return this.id;
+    }
 
-	public String getEmail() {
-		return this.email;
-	}
+    public String getEmail() {
+        return this.email;
+    }
 
-	public String getPassword() {
-		return this.password;
-	}
+    public String getPassword() {
+        return this.password;
+    }
 
-	public String getSecret() {
-		return this.secret;
-	}
+    public String getSecret() {
+        return this.secret;
+    }
 
-	public String getAnswer() {
-		return this.answer;
-	}
+    public String getAnswer() {
+        return this.answer;
+    }
 
 }

@@ -18,17 +18,20 @@ package com.rookie.bigdata;
 
 import java.util.Map;
 
+/**
+ * 自定义存储用户信息
+ */
 public class MapCustomUserRepository implements CustomUserRepository {
 
-	private final Map<String, CustomUser> emailToCustomUser;
+    private final Map<String, CustomUser> emailToCustomUser;
 
-	public MapCustomUserRepository(Map<String, CustomUser> emailToCustomUser) {
-		this.emailToCustomUser = emailToCustomUser;
-	}
+    public MapCustomUserRepository(Map<String, CustomUser> emailToCustomUser) {
+        this.emailToCustomUser = emailToCustomUser;
+    }
 
-	@Override
-	public CustomUser findCustomUserByEmail(String email) {
-		return this.emailToCustomUser.get(email);
-	}
+    @Override
+    public CustomUser findCustomUserByEmail(String email) {
+        return this.emailToCustomUser.get(email);
+    }
 
 }

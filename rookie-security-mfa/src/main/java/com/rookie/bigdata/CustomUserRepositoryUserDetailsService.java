@@ -27,63 +27,76 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 用于根据用户名加载用户信息
+ */
 @Service
 public class CustomUserRepositoryUserDetailsService implements UserDetailsService {
 
-	private final CustomUserRepository userRepository;
+    private final CustomUserRepository userRepository;
 
-	public CustomUserRepositoryUserDetailsService(CustomUserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
+    public CustomUserRepositoryUserDetailsService(CustomUserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		CustomUser customUser = this.userRepository.findCustomUserByEmail(username);
-		if (customUser == null) {
-			throw new UsernameNotFoundException("username " + username + " is not found");
-		}
-		return new CustomUserDetails(customUser);
-	}
+    /**
+     * 加载用户信息
+     *
+     * @param username the username identifying the user whose data is required.
+     * @return
+     * @throws UsernameNotFoundException
+     */
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        CustomUser customUser = this.userRepository.findCustomUserByEmail(username);
+        if (customUser == null) {
+            throw new UsernameNotFoundException("username " + username + " is not found");
+        }
+        return new CustomUserDetails(customUser);
+    }
 
-	static final class CustomUserDetails extends CustomUser implements UserDetails {
+    /**
+     * 自定义用户并实现了UserDetails
+     */
+    static final class CustomUserDetails extends CustomUser implements UserDetails {
 
-		private static final List<GrantedAuthority> ROLE_USER = Collections
-			.unmodifiableList(AuthorityUtils.createAuthorityList("ROLE_USER"));
+        private static final List<GrantedAuthority> ROLE_USER = Collections
+                .unmodifiableList(AuthorityUtils.createAuthorityList("ROLE_USER"));
 
-		CustomUserDetails(CustomUser customUser) {
-			super(customUser);
-		}
+        CustomUserDetails(CustomUser customUser) {
+            super(customUser);
+        }
 
-		@Override
-		public Collection<? extends GrantedAuthority> getAuthorities() {
-			return ROLE_USER;
-		}
+        @Override
+        public Collection<? extends GrantedAuthority> getAuthorities() {
+            return ROLE_USER;
+        }
 
-		@Override
-		public String getUsername() {
-			return getEmail();
-		}
+        @Override
+        public String getUsername() {
+            return getEmail();
+        }
 
-		@Override
-		public boolean isAccountNonExpired() {
-			return true;
-		}
+        @Override
+        public boolean isAccountNonExpired() {
+            return true;
+        }
 
-		@Override
-		public boolean isAccountNonLocked() {
-			return true;
-		}
+        @Override
+        public boolean isAccountNonLocked() {
+            return true;
+        }
 
-		@Override
-		public boolean isCredentialsNonExpired() {
-			return true;
-		}
+        @Override
+        public boolean isCredentialsNonExpired() {
+            return true;
+        }
 
-		@Override
-		public boolean isEnabled() {
-			return true;
-		}
+        @Override
+        public boolean isEnabled() {
+            return true;
+        }
 
-	}
+    }
 
 }
