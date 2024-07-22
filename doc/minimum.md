@@ -211,6 +211,7 @@ public class SecurityConfiguration {
 
 最终打印出的过滤器如下：后面我们会一一介绍这些过滤器
 
+```java
 Security filter chain: [
   DisableEncodeUrlFilter
   WebAsyncManagerIntegrationFilter
@@ -229,6 +230,7 @@ Security filter chain: [
   ExceptionTranslationFilter
   AuthorizationFilter
 ]
+```
 
 参考：[Spring Security 实战干货：WebSecurity和HttpSecurity的关系](https://cloud.tencent.com/developer/article/1818173)
 
