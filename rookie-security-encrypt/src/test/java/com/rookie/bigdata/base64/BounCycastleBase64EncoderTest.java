@@ -1,6 +1,7 @@
 package com.rookie.bigdata.base64;
 
 
+import com.rookie.bigdata.basic.base64.BounCycastleBase64Encoder;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

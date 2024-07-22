@@ -1,18 +1,15 @@
 package com.rookie.bigdata.aes;
 
+import com.rookie.bigdata.basic.aes.AesEcbBytesEncryptor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @Class AesEcbBytesEncryptorTest

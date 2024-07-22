@@ -13,5 +13,8 @@ base64:
 https://www.php.cn/faq/453700.html
 https://cloud.tencent.com/developer/article/1849549
 
+MD5:
+https://blog.csdn.net/weixin_39640298/article/details/84555814
+https://baijiahao.baidu.com/s?id=1766871756862049024&wfr=spider&for=pc
 
 

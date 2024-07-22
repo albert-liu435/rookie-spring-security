@@ -1,11 +1,10 @@
 package com.rookie.bigdata.md;
 
+import com.rookie.bigdata.basic.md.Md5Util;
 import org.apache.commons.codec.binary.Hex;
 import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @Class Md5UtilTest

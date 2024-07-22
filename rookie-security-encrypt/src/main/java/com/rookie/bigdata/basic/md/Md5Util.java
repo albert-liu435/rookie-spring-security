@@ -1,4 +1,4 @@
-package com.rookie.bigdata.md;
+package com.rookie.bigdata.basic.md;
 
 import java.security.MessageDigest;
 

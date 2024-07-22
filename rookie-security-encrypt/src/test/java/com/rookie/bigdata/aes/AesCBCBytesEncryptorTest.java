@@ -1,10 +1,9 @@
 package com.rookie.bigdata.aes;
 
+import com.rookie.bigdata.basic.aes.AesCBCBytesEncryptor;
 import org.junit.jupiter.api.Test;
 
 import java.util.Base64;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @Class AesCBCBytesEncryptorTest

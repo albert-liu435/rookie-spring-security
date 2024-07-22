@@ -1,4 +1,4 @@
-package com.rookie.bigdata.base64;
+package com.rookie.bigdata.basic.base64;
 
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.UrlBase64;

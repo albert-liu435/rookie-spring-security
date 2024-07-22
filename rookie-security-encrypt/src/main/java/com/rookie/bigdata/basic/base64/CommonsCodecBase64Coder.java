@@ -1,4 +1,4 @@
-package com.rookie.bigdata.base64;
+package com.rookie.bigdata.basic.base64;
 
 
 import org.apache.commons.codec.binary.Base64;

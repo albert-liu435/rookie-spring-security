@@ -1,4 +1,4 @@
-package com.rookie.bigdata.aes;
+package com.rookie.bigdata.basic.aes;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;

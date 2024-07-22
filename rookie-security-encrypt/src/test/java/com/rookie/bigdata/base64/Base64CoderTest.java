@@ -1,5 +1,6 @@
 package com.rookie.bigdata.base64;
 
+import com.rookie.bigdata.basic.base64.Base64Coder;
 import org.junit.jupiter.api.Test;
 
 import static org.testng.AssertJUnit.assertEquals;

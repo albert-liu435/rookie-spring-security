@@ -1,8 +1,7 @@
 package com.rookie.bigdata.base64;
 
+import com.rookie.bigdata.basic.base64.Base64Util;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @Class Base64UtilTest

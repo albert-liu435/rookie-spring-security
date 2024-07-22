@@ -1,5 +1,6 @@
 package com.rookie.bigdata.base64;
 
+import com.rookie.bigdata.basic.base64.CommonsCodecBase64Coder;
 import org.apache.commons.codec.binary.Base64;
 import org.junit.jupiter.api.Test;
 
