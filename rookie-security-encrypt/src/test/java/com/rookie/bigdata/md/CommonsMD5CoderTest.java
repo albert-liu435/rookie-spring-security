@@ -1,6 +1,6 @@
 package com.rookie.bigdata.md;
 
-import com.rookie.bigdata.basic.md.CommonsMD5Coder;
+import com.rookie.bigdata.basic.basic.md.CommonsMD5Coder;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

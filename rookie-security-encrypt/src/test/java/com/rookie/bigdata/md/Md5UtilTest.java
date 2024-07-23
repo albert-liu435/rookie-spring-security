@@ -1,6 +1,6 @@
 package com.rookie.bigdata.md;
 
-import com.rookie.bigdata.basic.md.Md5Util;
+import com.rookie.bigdata.basic.basic.md.Md5Util;
 import org.apache.commons.codec.binary.Hex;
 import org.junit.jupiter.api.Test;
 

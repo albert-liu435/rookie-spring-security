@@ -58,11 +58,19 @@
             <artifactId>testng</artifactId>
             <version>7.5.1</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>bouncycastle</groupId>-->
+<!--            <artifactId>bcprov-jdk15</artifactId>-->
+<!--            <version>140</version>-->
+<!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on -->
         <dependency>
-            <groupId>bouncycastle</groupId>
-            <artifactId>bcprov-jdk15</artifactId>
-            <version>140</version>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
+<!--            <version>1.78.1</version>-->
         </dependency>
+
+
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>

@@ -39,3 +39,22 @@ https://blog.csdn.net/qq_32907491/article/details/131524420
 https://blog.csdn.net/qq_15764943/article/details/118099518
 
 DES:
+https://blog.csdn.net/a745233700/article/details/102315531
+https://blog.csdn.net/Demonslzh/article/details/129129493
+https://www.cnblogs.com/bjlhx/p/6544766.html
+
+AES:
+https://goodapple.top/archives/162
+https://juejin.cn/post/6844903505782636557
+https://blog.csdn.net/qq_28205153/article/details/55798628
+
+IDEA:
+https://www.cnblogs.com/lordtianqiyi/articles/16420952.html
+https://blog.csdn.net/qq_40279192/article/details/107420773
+https://www.cnblogs.com/flydean/p/14775839.html
+
+PBE:
+https://www.cnblogs.com/crazylqy/p/5178186.html
+https://blog.csdn.net/ydonghao2/article/details/11038777
+
+DH:
