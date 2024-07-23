@@ -1,22 +1,21 @@
-package com.rookie.bigdata.basic.dh;
+package com.rookie.bigdata.basic.asymmetric.dh;
 
 import org.apache.commons.codec.binary.Base64;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @Class DHCoderTest
- * @Description https://blog.csdn.net/chenwewi520feng/article/details/131321538
- * https://blog.csdn.net/fengzun_yi/article/details/104497160
- * 需要设置参数： 将 -Djdk.crypto.KeyAgreement.legacyKDF=true 写入JVM系统变量中，
+ * @Description
  * @Author rookie
- * @Date 2024/7/23 9:02
+ * @Date 2024/7/23 16:17
  * @Version 1.0
  */
- class DHCoderTest {
+class DHCoderTest {
     /**
      * 甲方公钥
      */
@@ -73,7 +72,14 @@ import static org.junit.jupiter.api.Assertions.*;
         key_b = DHCoder.getSecretKey(publicKey_a, privateKey_b);
         System.err.println("乙方本地密钥:\n" + Base64.encodeBase64String(key_b));
 
-        assertEquals(key_a, key_b);
+//        assertEquals(key_a, key_b);
+
+        assertArrayEquals(key_a,key_b);
+
+
+
+//        Arrays.equals(key_a,key_b);
+
     }
 
     /**

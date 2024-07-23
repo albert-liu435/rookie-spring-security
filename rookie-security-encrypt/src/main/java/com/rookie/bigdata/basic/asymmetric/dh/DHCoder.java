@@ -1,4 +1,4 @@
-package com.rookie.bigdata.basic.dh;
+package com.rookie.bigdata.basic.asymmetric.dh;
 
 import java.security.Key;
 import java.security.KeyFactory;
