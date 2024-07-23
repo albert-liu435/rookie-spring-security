@@ -2,6 +2,7 @@ package com.rookie.bigdata.base64;
 
 import com.rookie.bigdata.basic.base64.Base64Coder;
 import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 
 import static org.testng.AssertJUnit.assertEquals;
 
@@ -38,5 +39,26 @@ class Base64CoderTest {
         // Base64解码
         String output = Base64Coder.decode(data);
         System.err.println("解码后:\n\t" + output);
+    }
+
+
+    @Test
+    void test001()throws Exception{
+        String encodeMsg="A";
+        String encoder = Base64Coder.encode(encodeMsg, "utf-8");
+        String decoder = Base64Coder.decode(encoder, "utf-8");
+        Assert.assertEquals(encodeMsg,decoder);
+    }
+
+    @Test
+    void testHash001()throws Exception{
+        //99162322
+        int i = "hello".hashCode();
+        System.out.println(i);
+        int i1 = "hello".hashCode();
+        System.out.println(i1);
+        //　　根据碰撞概率，哈希算法的输出长度越长，就越难产生碰撞，也就越安全。
+        System.out.println("AaAaAa".hashCode());//1952508096
+        System.out.println("BBAaBB".hashCode());//1952508096
     }
 }

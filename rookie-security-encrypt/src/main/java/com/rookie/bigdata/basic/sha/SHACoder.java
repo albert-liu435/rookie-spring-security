@@ -24,6 +24,18 @@ public class SHACoder {
     }
 
     /**
+     * SHA-224加密
+     */
+    public static byte[] encodeSHA224(byte[] data) throws Exception {
+        // 初始化MessageDigest
+        MessageDigest md = MessageDigest.getInstance("SHA-224");
+
+        // 执行消息摘要
+        return md.digest(data);
+    }
+
+
+    /**
      * SHA-256加密
      */
     public static byte[] encodeSHA256(byte[] data) throws Exception {

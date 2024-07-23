@@ -34,4 +34,13 @@ class Md5UtilTest {
         String s = Hex.encodeHexString(bytes);
         System.out.println(s);
     }
+
+
+    @Test
+    void encodemd5() throws Exception{
+        String str = Md5Util.md5("hello".getBytes(StandardCharsets.UTF_8));
+//        System.out.println(new String(bytes,StandardCharsets.UTF_8));
+//        String s = Hex.encodeHexString(bytes);
+        System.out.println(str);
+    }
 }
