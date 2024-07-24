@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @Class ResourceController
- * @Description TODO
+ * @Description
  * @Author rookie
  * @Date 2024/7/8 18:15
  * @Version 1.0
