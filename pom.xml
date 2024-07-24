@@ -28,11 +28,11 @@
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-<!--        <spring.boot.version>3.2.2</spring.boot.version>-->
+        <!--        <spring.boot.version>3.2.2</spring.boot.version>-->
         <spring.boot.version>3.3.1</spring.boot.version>
-<!--        <mysql.version>5.1.47</mysql.version>-->
+        <!--        <mysql.version>5.1.47</mysql.version>-->
         <hutool.version>5.8.28</hutool.version>
-<!--        <weixin-java-pay.version>4.0.6.B</weixin-java-pay.version>-->
+        <!--        <weixin-java-pay.version>4.0.6.B</weixin-java-pay.version>-->
 
     </properties>
 
@@ -45,11 +45,11 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-<!--            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.version}</version>
-            </dependency>-->
+            <!--            <dependency>
+                            <groupId>mysql</groupId>
+                            <artifactId>mysql-connector-java</artifactId>
+                            <version>${mysql.version}</version>
+                        </dependency>-->
             <!-- hutool工具类 -->
             <dependency>
                 <groupId>cn.hutool</groupId>
@@ -68,7 +68,16 @@
                 <artifactId>bcprov-jdk18on</artifactId>
                 <version>1.78.1</version>
             </dependency>
-
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.16.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>keytool-api</artifactId>
+                <version>1.7</version>
+            </dependency>
 
         </dependencies>
 

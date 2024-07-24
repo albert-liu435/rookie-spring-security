@@ -1,7 +1,6 @@
 package com.rookie.bigdata.basic.symmetric.pbe;
 
 import org.junit.jupiter.api.Test;
-import org.testng.annotations.BeforeMethod;
 
 import java.security.Key;
 import java.security.SecureRandom;

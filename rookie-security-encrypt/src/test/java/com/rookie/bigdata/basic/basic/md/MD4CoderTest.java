@@ -1,4 +1,4 @@
-package com.rookie.bigdata.md;
+package com.rookie.bigdata.basic.basic.md;
 
 import com.rookie.bigdata.basic.basic.md.MD4Coder;
 import org.junit.jupiter.api.Test;

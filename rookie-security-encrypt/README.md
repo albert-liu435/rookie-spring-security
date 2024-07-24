@@ -10,6 +10,19 @@ AES算法：
 https://blog.csdn.net/m0_63216218/article/details/131774375
 https://www.cnblogs.com/chen-lhx/p/5817161.html
 
+java密钥库：
+https://www.cnblogs.com/asker009/p/14325752.html
+https://blog.csdn.net/a82514921/article/details/104588573
+https://www.cnblogs.com/yangchongxing/p/13834102.html
+https://blog.csdn.net/LVSONGTAO1225/article/details/131518523
+
+
+
+
+
+
+
+
 
 
 
@@ -85,3 +98,6 @@ https://blog.csdn.net/chenwewi520feng/article/details/131327030
 SSF33、SM1、SM4、SM7是对称算法
 SM2、SM9是非对称算法
 SM3是哈希算法
+
+
+

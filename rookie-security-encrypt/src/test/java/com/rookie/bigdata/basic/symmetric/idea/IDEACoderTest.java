@@ -1,10 +1,11 @@
 package com.rookie.bigdata.basic.symmetric.idea;
 
-import static org.testng.Assert.assertEquals;
 
 import com.rookie.bigdata.basic.symmetric.idea.IDEACoder;
 import org.apache.commons.codec.binary.Base64;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @Class IDEACoderTest

@@ -1,4 +1,4 @@
-package com.rookie.bigdata.md;
+package com.rookie.bigdata.basic.basic.md;
 
 import com.rookie.bigdata.basic.basic.md.Md5Util;
 import org.apache.commons.codec.binary.Hex;

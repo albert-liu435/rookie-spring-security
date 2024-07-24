@@ -2,9 +2,9 @@ package com.rookie.bigdata.basic.basic.base64;
 
 import com.rookie.bigdata.basic.basic.base64.Base64Coder;
 import org.junit.jupiter.api.Test;
-import org.testng.Assert;
 
-import static org.testng.AssertJUnit.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 /**
  * @Class Base64CoderTest
@@ -47,7 +47,7 @@ class Base64CoderTest {
         String encodeMsg="A";
         String encoder = Base64Coder.encode(encodeMsg, "utf-8");
         String decoder = Base64Coder.decode(encoder, "utf-8");
-        Assert.assertEquals(encodeMsg,decoder);
+        assertEquals(encodeMsg,decoder);
     }
 
     @Test
