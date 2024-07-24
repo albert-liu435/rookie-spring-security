@@ -17,6 +17,7 @@ import java.security.PublicKey;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
@@ -59,13 +60,14 @@ class CertificatePKCS12CoderTest {
 
         String fileName = "fire.pkcs12";
         //pkcs12文件路径
-        String path = WriterFileUtils.filePath("/src/main/resources/com/rookie/bigdata/basic/cert/", fileName);
+        String path = WriterFileUtils.filePath("/src/main/resources/com/rookie/bigdata/basic/cert/pkcs/", fileName);
 
         String storepass = "13987664391";
         String keyAlias = "fire";
 
         PrivateKey key = CertificatePKCS12Coder.getPrivateKey(path, keyAlias, storepass);
         System.out.println(key.toString());
+//        System.out.println(key.);
         String privateKeyStr = Base64Encoder.encode(key.getEncoded());
         System.out.println();
         System.out.println("-----BEGIN PRIVATE KEY-----");
@@ -81,7 +83,7 @@ class CertificatePKCS12CoderTest {
 
         String fileName = "fire.pkcs12";
         //pkcs12文件路径
-        String path = WriterFileUtils.filePath("/src/main/resources/com/rookie/bigdata/basic/cert/", fileName);
+        String path = WriterFileUtils.filePath("/src/main/resources/com/rookie/bigdata/basic/cert/pkcs/", fileName);
 
         String storepass = "13987664391";
         String keyAlias = "fire";
@@ -205,6 +207,15 @@ class CertificatePKCS12CoderTest {
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(new Base64Decoder().decode(str));
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         PublicKey publicKey = keyFactory.generatePublic(keySpec);
+
+        String str2="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCLKClfVSaEbRXmQ9/+SdYa1dVd2LVpU3kbcbigH9ZvEtxYfnI+KhUEj3lQ6qK5geWhgkhNBORFWzvd67OLZmcAAkO1B0QniSB5RsoMhehV18GOnKrtiOv5lTjMkz4YQm1/epmkfHXS8nye0xd5ZW/13D0karira6JFk9FXtuLWpFClFXhjHrGtgVWe8RnmjV7OrhcfDh32lfW7jA6lgWSsBavh1XlsGoC1DJeLAlTqUi0DnBUZHndL6KecuAEBJR00OEXx0aYEKxmgV7IOB7YyxK+dEglEwNHlNYIydyHZzdQ5+ijcTMEOZJUXdbkzVFzTduEEU8IJDJdoWizPn3DVAgMBAAECggEBAIXyxsBJSqY2Ctp3g2lW0Y1LP/Lx4s3b17ufH8SiYNrSIN/d90H3Z/vXz0MgWDqQ2uU4bzgT+Vb5lwrrEwygKY1MoLfkoqobyPJ0PZEIZLgc0uffzniPT/YSuXXSVfcsGhKXhMVcOF4xo9uN/g6QodDbis8/GzuGg9DNlLkGBhvs60nTSFujVrCrkVZXI6HzJ2xKUrUvdBth+2TX1oRfea2narFIm1Rb8QYXaUFS2SDug9kKvVnt9kGmWCPiSLeQOpWhaDK/iX0JuVpJLtELdnmNTL04lFSc4DY9GdL34+oxb/xGzEIhQ8jI+Nu4VjAGsCWQn+WJvASYmtuUmDeCxZECgYEAw7EQ1crq5Jmdg+HPTorNfaX5vMyhbjPArym67jqmkcQvwnLCylYlog7iKBkLewm4mSb97e2nHMxsU15SsqvzDeN5MCW4VWAgsJa5bw2muSRtfcJGfL6N8kbhTo9vGz4LVKpLr0t9Mm3IRW0ZLs6d9/7+z8qNeM7cPZNPtOHr768CgYEAtgrUj/bWiXQrwLg2ML23buK8cMoc6mnGKxfRX2oI+vI4R0D+BIdf7rohN9BjJKkaYL98itmLYilF+dplD2BX438v6JsYNdKZIaXT69t5Oa38hyUy4KrxncBUjv35X1/js2Z9JIVP5fs/svjXBaC0HuJDa4BH+dumN04nCcaJZLsCgYA7ixPpSV3hgtBHwZyXdGqEMc1kYgs4gey+H39uX1AxiDVUACE++alnvwmXU8+Hd3TAvPmEvMwdWiIX19pn3SQOdMl6GfAVojMwKBxyKwAw02GxYzyZVk3Qizqg8cnHy0AdWde/lcOZZYgLf9+qu1mbjO4xgZs8SA0Be2JEUn28pwKBgGGETbfND8HUNHfpdkYH6xKAbVeyPWkpPlnpSWRmZecgCBvLage9CRvWI2NFw0ZpO9Ml4K50uODdoTmlz0s8XfhlMqHVK1Pxu8w1i9+l0zudw1AWEjod+I578BAlZwe7UzvQJCuDKnjVbZsPCAhgvPxqUplsv6HOEy0/NVRcQU9vAoGAS2TjtYudV7UgNr46MjsUN9KEUFx0q6ELD8AWznY+xztXMK0eGBjdJMOpfzw9dsXsTRmgO/YlnL/PheQRekqB7T0q3atk3yLjVWd1f0lH5aLeejxH9UJPEuDt0bBeqVaSXMUH3heI1Ft4nmFsOsqPdaKdS9gB3JliXhbIC/eMiUQ=";
+        X509EncodedKeySpec keySpec1 = new X509EncodedKeySpec(new Base64Decoder().decode(str2));
+        KeyFactory keyFactory1 = KeyFactory.getInstance("RSA");
+        PrivateKey privateKey = keyFactory1.generatePrivate(keySpec1);
+
+//        RSAPrivateKeySpec rsaPrivateKeySpec=new RSAPrivateKeySpec();
+//        rsaPrivateKeySpec.get
+
     }
 
 

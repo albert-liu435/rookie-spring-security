@@ -61,7 +61,7 @@ class CertificateCoderTest {
         Base64Encoder base64Encoder = new Base64Encoder();
         KeyStore keystore = KeyStore.getInstance("PKCS12");
 
-        keystore.load(WriterFileUtils.readFile("/src/main/resources/com/rookie/bigdata/basic/cert/",fileName), storepass.toCharArray());
+        keystore.load(WriterFileUtils.readFile("/src/main/resources/com/rookie/bigdata/basic/cert/pkcs/",fileName), storepass.toCharArray());
 
 //        keystore.load(CertificateCoderTest.class.getResourceAsStream("/key/home.pkcs12"), storepass.toCharArray());
         PrivateKey key = (PrivateKey) keystore.getKey(keyAlias, storepass.toCharArray());
@@ -89,7 +89,7 @@ class CertificateCoderTest {
     @Test
     void testGetPublicKeyFromCertificate()throws Exception{
         String fileName="fire.pkcs12";
-        InputStream inputStream = WriterFileUtils.readFile("/src/main/resources/com/rookie/bigdata/basic/cert/",fileName);
+        InputStream inputStream = WriterFileUtils.readFile("/src/main/resources/com/rookie/bigdata/basic/cert/pkcs/",fileName);
         CertificateFactory ft = CertificateFactory.getInstance("X.509");
         X509Certificate certificate = (X509Certificate) ft.generateCertificate(inputStream);
         PublicKey publicKey = certificate.getPublicKey();
