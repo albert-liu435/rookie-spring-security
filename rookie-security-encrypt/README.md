@@ -102,3 +102,5 @@ SM3是哈希算法
 ECC:
 https://blog.csdn.net/weixin_45264425/article/details/137337498
 
+RIPEMD:
+https://www.jianshu.com/p/2ac0e84d95d4
