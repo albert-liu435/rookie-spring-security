@@ -14,17 +14,14 @@ import java.util.Map;
  * @Version 1.0
  */
 public class BcSymmetric extends AbstractSymmetric {
-
     @Override
     public void decryptBefore() throws Exception {
         Security.addProvider(new BouncyCastleProvider());
-        return;
     }
 
     @Override
     public void encryptBefore() throws Exception {
         Security.addProvider(new BouncyCastleProvider());
-        return;
     }
 
     @Override
@@ -33,4 +30,23 @@ public class BcSymmetric extends AbstractSymmetric {
         KeyGenerator kg = KeyGenerator.getInstance(algorithm.getKey(), "BC");
         return kg;
     }
+
+//    @Override
+//    public void decryptBefore() throws Exception {
+//        Security.addProvider(new BouncyCastleProvider());
+//        return;
+//    }
+//
+//    @Override
+//    public void encryptBefore() throws Exception {
+//        Security.addProvider(new BouncyCastleProvider());
+//        return;
+//    }
+//
+//    @Override
+//    public KeyGenerator initKeyBefore(Map.Entry<String, String> algorithm) throws Exception {
+//        Security.addProvider(new BouncyCastleProvider());
+//        KeyGenerator kg = KeyGenerator.getInstance(algorithm.getKey(), "BC");
+//        return kg;
+//    }
 }

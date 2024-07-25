@@ -1,33 +1,30 @@
-package com.rookie.bigdata.basic.symmetric.des.des3des;
+package com.rookie.bigdata.basic.asymmetric.dh;
 
-
-
-import com.rookie.bigdata.basic.asymmetric.dh.AbstractDHCoder;
-import com.rookie.bigdata.basic.asymmetric.dh.BcDHCoder;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Base64;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * @Class BcSymmetricTest
+ * @Class BcDHCoderTest
  * @Description
  * @Author rookie
- * @Date 2024/7/23 15:38
+ * @Date 2024/7/25 15:02
  * @Version 1.0
  */
-public class BcSymmetricTest {
+class BcDHCoderTest {
 
     AbstractDHCoder abstractDHCoder=null;
-//    @Before
-//    public void setUp(){
-//        abstractDHCoder=new BcDHCoder();
-//    }
+    @BeforeEach
+    public void setUp(){
+        abstractDHCoder=new BcDHCoder();
+    }
 
     @Test
     public void initKey() throws Exception {
-        abstractDHCoder=new BcDHCoder();
         String msg="我是密文";
         // 甲方构建密钥对
         Map.Entry<byte[], byte[]> entry = AbstractDHCoder.initKey();
@@ -43,16 +40,16 @@ public class BcSymmetricTest {
         System.out.println("乙方 pubkey 发送给 甲方");
 
         System.out.println("甲方加密数据，使用自己私钥以及 对方公钥");
-        byte[] encrypt = abstractDHCoder.encrypt(AbstractDHCoder.AES,msg.getBytes(), entryYi.getKey(), entry.getValue());
+        byte[] encrypt = abstractDHCoder.encrypt(AbstractDHCoder.DESede,msg.getBytes(), entryYi.getKey(), entry.getValue());
         System.out.println("甲方将加密数据，发送给乙方");
         System.out.println("乙方 使用自己私钥以及 对方公钥 解密");
-        byte[] decrypt = abstractDHCoder.decrypt(AbstractDHCoder.AES,encrypt, entry.getKey(), entryYi.getValue());
+        byte[] decrypt = abstractDHCoder.decrypt(AbstractDHCoder.DESede,encrypt, entry.getKey(), entryYi.getValue());
         System.out.println(new String(decrypt));
 
 //        System.out.println("乙方回发消息");
-        byte[] encrypt2 = abstractDHCoder.encrypt(AbstractDHCoder.AES,"乙方回发消息".getBytes(), entry.getKey(), entryYi.getValue());
+        byte[] encrypt2 = abstractDHCoder.encrypt(AbstractDHCoder.DESede,"乙方回发消息".getBytes(), entry.getKey(), entryYi.getValue());
 
-        byte[] decrypt2 = abstractDHCoder.decrypt(AbstractDHCoder.AES,encrypt2, entryYi.getKey(), entry.getValue());
+        byte[] decrypt2 = abstractDHCoder.decrypt(AbstractDHCoder.DESede,encrypt2, entryYi.getKey(), entry.getValue());
         System.out.println(new String(decrypt2));
     }
 }
