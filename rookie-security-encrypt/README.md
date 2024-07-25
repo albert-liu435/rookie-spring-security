@@ -28,10 +28,16 @@ https://blog.csdn.net/LVSONGTAO1225/article/details/131518523
 
 原理：
 base64:
+https://www.cnblogs.com/palmer0801/p/12111805.html
 https://www.php.cn/faq/453700.html
 https://cloud.tencent.com/developer/article/1849549
 https://www.cnblogs.com/bjlhx/p/6544311.
 https://old-panda.com/2020/02/14/base64-notes/
+
+
+base58：
+https://blog.csdn.net/qq_44827634/article/details/124921475
+https://www.cnblogs.com/bjlhx/p/6544311.html
 
 MD5:
 https://blog.csdn.net/weixin_39640298/article/details/84555814
@@ -39,6 +45,7 @@ https://baijiahao.baidu.com/s?id=1766871756862049024&wfr=spider&for=pc
 https://www.cnblogs.com/bjlhx/p/6544311.html
 https://blog.csdn.net/u012611878/article/details/54000607
 https://www.cnblogs.com/xiaxveliang/p/15004954.html
+https://blog.csdn.net/jisuanji111111/article/details/131025086
 
 SHA:
 https://blog.csdn.net/u011583927/article/details/80905740
@@ -104,3 +111,6 @@ https://blog.csdn.net/weixin_45264425/article/details/137337498
 
 RIPEMD:
 https://www.jianshu.com/p/2ac0e84d95d4
+
+
+https://github.com/bjlhx15/algorithm-sign

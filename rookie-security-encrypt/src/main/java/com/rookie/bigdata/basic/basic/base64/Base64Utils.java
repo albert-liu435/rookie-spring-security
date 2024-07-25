@@ -12,7 +12,7 @@ import java.math.BigInteger;
  */
 public class Base64Utils {
 
-    //    Base64的索引表，字符选用了"A-Z、a-z、0-9、+、/" 64个可打印字符
+    //标准的Base64协议规定索引表    Base64的索引表，字符选用了"A-Z、a-z、0-9、+、/" 64个可打印字符
     private static String base64Table = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
     private static String add = "=";
 
@@ -27,6 +27,7 @@ public class Base64Utils {
         StringBuilder base64Str = new StringBuilder();
         byte[] bytesStr;
         try {
+            //字符串转换为字节数组
             bytesStr = str.getBytes(charsetName);
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
