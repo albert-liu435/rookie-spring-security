@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <modules>
-        <module>rookie-security-authentication</module>
+<!--        <module>rookie-security-authentication</module>-->
         <module>rookie-security-encrypt</module>
         <module>rookie-security-explicits</module>
         <module>rookie-security-filter</module>
@@ -19,7 +19,8 @@
         <module>rookie-security-mfa</module>
         <module>rookie-security-multichain</module>
         <module>rookie-security-username-password</module>
-        <module>rookie-security-rabc</module>
+       <!-- <module>rookie-security-rabc</module>-->
+        <module>rookie-security-yserver</module>
     </modules>
 
     <properties>
