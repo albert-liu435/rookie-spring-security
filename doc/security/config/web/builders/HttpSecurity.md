@@ -104,4 +104,19 @@ public class SecurityConfiguration {
 
 我们故意不进行认证访问http://localhost:8888/app/hello和http://localhost:8888/web/hello,可以看到响应的内容不同，证明了请求走了不同的流程
 
+### HttpSecurity 的httpBasic()方法
+
+源码如下
+
+```java
+	public HttpSecurity httpBasic(Customizer<HttpBasicConfigurer<HttpSecurity>> httpBasicCustomizer) throws Exception {
+		httpBasicCustomizer.customize(getOrApply(new HttpBasicConfigurer<>()));
+		return HttpSecurity.this;
+	}
+```
+
+主要用来添加 HTTP basic的认证方式，用于验证用户是否合法，通过HttpBasicConfigurer进行构建BasicAuthenticationFilter。
+
+[详情可参考](../authentication/www/BasicAuthenticationFilter.md)
+
 参考：[[Spring Security 多过滤链的使用](https://segmentfault.com/a/1190000040346944)
