@@ -1,30 +1,46 @@
-package com.rookie.bigdata.security;
+## HttpSecurity
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.SecurityFilterChain;
+HttpSecurity是spring security框架中的一个重要的类，其实就是一个SecurityBuilder，它最终的目的是构建SecurityFilterChain，同时也提供了很多快捷的方法创建不同的SecurityConfigurer。
+HttpSecurity执行doBuild方法的时候通过配置的SecurityConfigurer添加一些必要的Filter，最后在执行performBuild方法将这些Filter构造成一个SecurityFilterChain
 
-import java.nio.charset.StandardCharsets;
+HttpSecurity继承关系如下
 
-import static org.springframework.security.config.Customizer.withDefaults;
+```mermaid
+classDiagram
+	SecurityBuilder <|-- HttpSecurityBuilder
+ 	SecurityBuilder <|.. AbstractSecurityBuilder
+ 	SecurityBuilder <|.. HttpSecurity
+ 	HttpSecurityBuilder <|.. HttpSecurity
+ 	AbstractSecurityBuilder <|.. AbstractConfiguredSecurityBuilder
+    AbstractConfiguredSecurityBuilder <|-- HttpSecurity
+   class SecurityBuilder{
+     <<interface>>
+   }
+   class HttpSecurityBuilder{
+     <<interface>>
+   }
+   class AbstractConfiguredSecurityBuilder{
+     <<abstract>>
+   }
+   class AbstractSecurityBuilder{
+     <<abstract>>
+   }
+   class HttpSecurity{
+     <<class>>
+   }
 
-/**
- * @Class Explicit
- * @Description
- * @Author rookie
- * @Date 2024/7/3 9:03
- * @Version 1.0
- */
+    
+```
+
+### spring security配置多SecurityFilterChain
+
+有时候由于业务的需要，我们需要通过不同的请求进行不同的认证方式，有些时候可能存在这么一些情况，某些api 比如： /app/** 这些是给App端使用的，数据的返回都是以JSON的格式返回，而除了 /app/** 这些API之外，都是给web端使用的。
+
+这个实际上是有HttpSecurity中的一个属性private RequestMatcher requestMatcher = AnyRequestMatcher.INSTANCE;进行控制的，我们可以通过在SecurityFilterChain实例化的时候通过http.securityMatcher()进行更改这个来控制不同的请求走不同的认证流程。
+
+如下是我配置的不同的SecurityFilterChain
+
+```java
 @Configuration
 @EnableWebSecurity(debug = true)
 //@EnableWebSecurity()
@@ -58,6 +74,7 @@ public class SecurityConfiguration {
         return http.build();
     }
 
+
     @Bean
     @Order(2)
     public SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -71,30 +88,6 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//
-//        http
-//                .authorizeHttpRequests((authorize) -> authorize
-//                        .anyRequest().authenticated()
-//                )
-//
-////                .authorizeHttpRequests(new Customizer<AuthorizeHttpRequestsConfigurer<org.springframework.security.config.annotation.web.builders.HttpSecurity>.AuthorizationManagerRequestMatcherRegistry>() {
-////                    @Override
-////                    public void customize(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry authorizationManagerRequestMatcherRegistry) {
-////                        authorizationManagerRequestMatcherRegistry
-//////                                .requestMatchers("/favicon.ico").permitAll()
-////                                .requestMatchers("/code").permitAll()
-////                                .anyRequest().authenticated();
-////                    }
-////                })
-//                .httpBasic(withDefaults())
-//                .formLogin(withDefaults());
-//        return http.build();
-//    }
-
-
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails user = User.withDefaultPasswordEncoder()
@@ -106,3 +99,9 @@ public class SecurityConfiguration {
     }
 
 }
+
+```
+
+我们故意不进行认证访问http://localhost:8888/app/hello和http://localhost:8888/web/hello,可以看到响应的内容不同，证明了请求走了不同的流程
+
+参考：[[Spring Security 多过滤链的使用](https://segmentfault.com/a/1190000040346944)

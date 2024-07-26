@@ -24,4 +24,17 @@ public class RestHelloController {
     public String test() {
         return "test";
     }
+
+
+    @RequestMapping("/app/hello")
+    public String appHello(){
+
+        return "appHello";
+    }
+
+    @RequestMapping("/web/hello")
+    public String webHello(){
+
+        return "webHello";
+    }
 }
