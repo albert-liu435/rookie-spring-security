@@ -63,6 +63,7 @@ public interface SecurityContextRepository {
 
 
 
+
 实现类有DelegatingSecurityContextRepository,HttpSessionSecurityContextRepository，NullSecurityContextRepository
 
 DelegatingSecurityContextRepository:是一个委托类，里面可以封装多个SecurityContextRepository
