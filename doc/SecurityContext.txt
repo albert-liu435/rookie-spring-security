@@ -155,6 +155,20 @@ SecurityContextHolderStrategy
 SecurityContextHolderStrategy负责从SecurityContextRepository获取安全上下文，用于将该安全上下文能够在整个请求的任何地方获取到该安全上下文
 
 
+SecurityContext
+SecurityContext：安全上下文，主要持有Authentication对象，如果用户未鉴权，那Authentication对象将会是空的。该示例可以通过SecurityContextHolder.getContext静态方法获取。
+
+
+public interface SecurityContext extends Serializable {
+
+	/获取鉴权对象Authentication
+	Authentication getAuthentication();
+
+	/设置鉴权对象Authentication
+	void setAuthentication(Authentication authentication);
+
+}
+
 
 参考：
 https://blog.csdn.net/weixin_57128596/article/details/126844394
