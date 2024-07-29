@@ -1,0 +1,166 @@
+SecurityContextHolderStrategy
+SecurityContextHolderStrategy提供了存储安全上下文得策略，主要结合SecurityContextHolder使用，而SecurityContextHolder是Spring Security的一个组件，其实它是一个工具类，只提供一些静态方法。这个工具类的目的是用来保存应用程序中当前使用人的安全上下文。
+
+public interface SecurityContextHolderStrategy {
+
+	//清除安全上下文
+	void clearContext();
+
+	//获取安全上下文
+	SecurityContext getContext();
+
+	//获取Supplier<SecurityContext>
+	default Supplier<SecurityContext> getDeferredContext() {
+		return this::getContext;
+	}
+
+	//设置安全上下文
+	void setContext(SecurityContext context);
+
+	///设置安全上下文
+	default void setDeferredContext(Supplier<SecurityContext> deferredContext) {
+		setContext(deferredContext.get());
+	}
+
+	//创建空得安全上下文
+	SecurityContext createEmptyContext();
+
+}
+
+
+GlobalSecurityContextHolderStrategy：全局安全上下文存储，是JVM级别，在应用中所有得实例共享SecurityContext
+InheritableThreadLocalSecurityContextHolderStrategy：基于​​InheritableThreadLocal​​​的​​SecurityContextHolderStrategy​​实现。InheritableThreadLocal​​​类扩展了​​ThreadLocal​​类，以提供从父线程到子线程的值继承：当创建子线程时，子线程接收父线程具有值的所有可继承线程局部变量的初始值。
+ThreadLocalSecurityContextHolderStrategy：采用ThreadLocal策略保存安全上下文，在多线程环境下，每个线程都有自己的安全上下文副本，可以防止安全上下文由于多线程而产生的并发问题。
+ListeningSecurityContextHolderStrategy:是一个策略实现类,里面封装了一个SecurityContextHolderStrategy，同时具备发布订阅得功能。
+
+
+SecurityContextHolder：
+SecurityContextHolder它持有的是安全上下文（security context）的信息。当前操作的用户是谁，该用户是否已经被认证，他拥有哪些角色权等等，这些都被保存在SecurityContextHolder中。SecurityContextHolder默认使用ThreadLocal 策略来存储认证信息。看到ThreadLocal 也就意味着，这是一种与线程绑定的策略。在web环境下，Spring Security在用户登录时自动绑定认证信息到当前线程，在用户退出时，自动清除当前线程的认证信息。 例如获取用户信息：
+
+public class SecurityContextHolder {
+    //四种存储模式，实际代表四种策略
+	public static final String MODE_THREADLOCAL = "MODE_THREADLOCAL";
+	public static final String MODE_INHERITABLETHREADLOCAL = "MODE_INHERITABLETHREADLOCAL";
+	public static final String MODE_GLOBAL = "MODE_GLOBAL";
+	private static final String MODE_PRE_INITIALIZED = "MODE_PRE_INITIALIZED";
+     //系统属性
+	public static final String SYSTEM_PROPERTY = "spring.security.strategy";
+
+	private static String strategyName = System.getProperty(SYSTEM_PROPERTY);
+    // 安全上下文持有策略
+	private static SecurityContextHolderStrategy strategy;
+
+	private static int initializeCount = 0;
+
+	static {
+	    // 静态块中进行初始化
+		initialize();
+	}
+
+	private static void initialize() {
+		initializeStrategy();
+		initializeCount++;
+	}
+
+	private static void initializeStrategy() {
+
+		if (MODE_PRE_INITIALIZED.equals(strategyName)) {
+			Assert.state(strategy != null, "When using " + MODE_PRE_INITIALIZED
+					+ ", setContextHolderStrategy must be called with the fully constructed strategy");
+			return;
+		}
+		 // 如果strategyName属性没有值
+		if (!StringUtils.hasText(strategyName)) {
+			// Set default
+			strategyName = MODE_THREADLOCAL;
+		}
+		if (strategyName.equals(MODE_THREADLOCAL)) {
+			strategy = new ThreadLocalSecurityContextHolderStrategy();
+			return;
+		}
+		if (strategyName.equals(MODE_INHERITABLETHREADLOCAL)) {
+			strategy = new InheritableThreadLocalSecurityContextHolderStrategy();
+			return;
+		}
+		if (strategyName.equals(MODE_GLOBAL)) {
+			strategy = new GlobalSecurityContextHolderStrategy();
+			return;
+		}
+		// Try to load a custom strategy
+		try {
+		    //加载策略实例
+			Class<?> clazz = Class.forName(strategyName);
+			Constructor<?> customStrategy = clazz.getConstructor();
+			strategy = (SecurityContextHolderStrategy) customStrategy.newInstance();
+		}
+		catch (Exception ex) {
+			ReflectionUtils.handleReflectionException(ex);
+		}
+	}
+
+	//清空安全上下文SecurityContext
+	public static void clearContext() {
+		strategy.clearContext();
+	}
+
+	//获取安全上下文SecurityContext
+	public static SecurityContext getContext() {
+		return strategy.getContext();
+	}
+
+	//获取安全上下文Supplier<SecurityContext>
+	public static Supplier<SecurityContext> getDeferredContext() {
+		return strategy.getDeferredContext();
+	}
+
+
+	public static int getInitializeCount() {
+		return initializeCount;
+	}
+
+	//设置安全上下文
+	public static void setContext(SecurityContext context) {
+		strategy.setContext(context);
+	}
+
+
+	public static void setDeferredContext(Supplier<SecurityContext> deferredContext) {
+		strategy.setDeferredContext(deferredContext);
+	}
+
+
+	public static void setStrategyName(String strategyName) {
+		SecurityContextHolder.strategyName = strategyName;
+		initialize();
+	}
+
+	//设置策略模式
+	public static void setContextHolderStrategy(SecurityContextHolderStrategy strategy) {
+		Assert.notNull(strategy, "securityContextHolderStrategy cannot be null");
+		SecurityContextHolder.strategyName = MODE_PRE_INITIALIZED;
+		SecurityContextHolder.strategy = strategy;
+		initialize();
+	}
+
+	//
+	public static SecurityContextHolderStrategy getContextHolderStrategy() {
+		return strategy;
+	}
+
+	//创建空得安全上下文
+	public static SecurityContext createEmptyContext() {
+		return strategy.createEmptyContext();
+	}
+
+	@Override
+	public String toString() {
+		return "SecurityContextHolder[strategy='" + strategy.getClass().getSimpleName() + "'; initializeCount="
+				+ initializeCount + "]";
+	}
+
+}
+
+
+
+参考：https://blog.csdn.net/chihaihai/article/details/104830066
+https://blog.51cto.com/u_15870611/5837536
