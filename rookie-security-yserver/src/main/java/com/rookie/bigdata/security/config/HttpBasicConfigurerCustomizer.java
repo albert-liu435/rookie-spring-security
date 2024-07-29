@@ -1,5 +1,6 @@
 package com.rookie.bigdata.security.config;
 
+import com.rookie.bigdata.security.web.authentication.www.MyBasicAuthenticationEntryPoint;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
@@ -15,5 +16,7 @@ public class HttpBasicConfigurerCustomizer implements Customizer<HttpBasicConfig
     @Override
     public void customize(HttpBasicConfigurer<HttpSecurity> httpSecurityHttpBasicConfigurer) {
 
+        httpSecurityHttpBasicConfigurer
+                .authenticationEntryPoint(new MyBasicAuthenticationEntryPoint());
     }
 }

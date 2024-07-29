@@ -126,6 +126,7 @@ public final class HttpBasicConfigurer<B extends HttpSecurityBuilder<B>>
 
 	@Override
 	public void configure(B http) {
+        //获取认证管理器，默认实现类为ProviderManager
 		AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
 		BasicAuthenticationFilter basicAuthenticationFilter = new BasicAuthenticationFilter(authenticationManager,
 				this.authenticationEntryPoint);
