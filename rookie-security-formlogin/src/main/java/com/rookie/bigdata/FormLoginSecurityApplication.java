@@ -8,8 +8,6 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 
-import java.util.Arrays;
-
 /**
  * @Author rookie
  * @Description Hello Security application.
@@ -17,16 +15,16 @@ import java.util.Arrays;
  * @Version 1.0
  */
 @SpringBootApplication
-public class AuthenticationSecurityApplication extends SpringBootServletInitializer implements CommandLineRunner {
+public class FormLoginSecurityApplication extends SpringBootServletInitializer implements CommandLineRunner {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(AuthenticationSecurityApplication.class, args);
+        SpringApplication.run(FormLoginSecurityApplication.class, args);
     }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(AuthenticationSecurityApplication.class);
+        return application.sources(FormLoginSecurityApplication.class);
     }
 
     @Autowired
