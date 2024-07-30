@@ -1,0 +1,78 @@
+UserDetailsService
+
+UserDetailsService用于DaoAuthenticationProvider检索用户名、密码和其他属性，以便使用用户名和密码进行身份验证.Spring Security 提供了内存、JDBC和缓存实现UserDetailsService
+
+UserDetailsManager:是对UserDetailsService接口的一种扩展，增加了对UserDetails增删改查
+CachingUserDetailsService:缓存UserDetailsService
+InMemoryUserDetailsManager:内存UserDetails管理器，所有UserDetails都保存在内存中
+JdbcDaoImpl和JdbcUserDetailsManager:采用JDBC的方式管理UserDetails
+
+UserDetailsService如何注入到spring security框架中，可以参考 security三大组件.txt中InitializeUserDetailsBeanManagerConfigurer.InitializeUserDetailsManagerConfigurer#configure()方法,在该方法中会从Spring容器中获取userDetailsServices，然后加入到spring security中的DaoAuthenticationProvider。
+了解了userDetailsService的原理，我们就可以定义我们自己的userDetailsService，只要实现UserDetailsService接口并通过Spring容器管理该Bean即可。
+如在rookie-security-authentication项目我们我们自己定义的CustomUserDetailsService
+同理 PasswordEncoder也是一样的道理
+
+
+UserDetails
+用于提供用户的信息，包括用户名，密码，授权，账号是否锁定，Credentials是否过期等等信息
+
+public interface UserDetails extends Serializable {
+
+	/**
+	 * Returns the authorities granted to the user. Cannot return <code>null</code>.
+	 * @return the authorities, sorted by natural key (never <code>null</code>)
+	 */
+	Collection<? extends GrantedAuthority> getAuthorities();
+
+	/**
+	 * Returns the password used to authenticate the user.
+	 * @return the password
+	 */
+	String getPassword();
+
+	/**
+	 * Returns the username used to authenticate the user. Cannot return
+	 * <code>null</code>.
+	 * @return the username (never <code>null</code>)
+	 */
+	String getUsername();
+
+	/**
+	 * Indicates whether the user's account has expired. An expired account cannot be
+	 * authenticated.
+	 * @return <code>true</code> if the user's account is valid (ie non-expired),
+	 * <code>false</code> if no longer valid (ie expired)
+	 */
+	default boolean isAccountNonExpired() {
+		return true;
+	}
+
+	/**
+	 * Indicates whether the user is locked or unlocked. A locked user cannot be
+	 * authenticated.
+	 * @return <code>true</code> if the user is not locked, <code>false</code> otherwise
+	 */
+	default boolean isAccountNonLocked() {
+		return true;
+	}
+
+	/**
+	 * Indicates whether the user's credentials (password) has expired. Expired
+	 * credentials prevent authentication.
+	 * @return <code>true</code> if the user's credentials are valid (ie non-expired),
+	 * <code>false</code> if no longer valid (ie expired)
+	 */
+	default boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	/**
+	 * Indicates whether the user is enabled or disabled. A disabled user cannot be
+	 * authenticated.
+	 * @return <code>true</code> if the user is enabled, <code>false</code> otherwise
+	 */
+	default boolean isEnabled() {
+		return true;
+	}
+
+}
