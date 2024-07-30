@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rookie.bigdata.mapper.UserMapper">
+
+
+    <select id="loadUserByUsername" resultType="com.rookie.bigdata.domain.User">
+        select * from USER WHERE name = #{name}
+    </select>
+
+<!--    <select id="selectByCarType" resultType="com.rookie.bigdata.pojo.Car">-->
+<!--        select-->
+<!--            id,-->
+<!--            car_num carNum,-->
+<!--            brand,-->
+<!--            guide_price guidePrice,-->
+<!--            produce_time produceTime,-->
+<!--            car_type carType-->
+<!--        from-->
+<!--            t_car-->
+<!--        where-->
+<!--            car_type=#{carType}-->
+<!--    </select>-->
+</mapper>

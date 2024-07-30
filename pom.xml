@@ -9,16 +9,17 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <modules>
-        <module>rookie-security-formlogin</module>
+
         <module>rookie-security-encrypt</module>
         <module>rookie-security-securitycontext</module>
-        <module>rookie-security-filter</module>
+        <module>rookie-security-formlogin</module>
+<!--        <module>rookie-security-filter</module>
         <module>rookie-security-hello</module>
         <module>rookie-security-jwt</module>
         <module>rookie-security-jwtlogin</module>
         <module>rookie-security-mfa</module>
-        <module>rookie-security-multichain</module>
-        <module>rookie-security-username-password</module>
+        <module>rookie-security-multichain</module>-->
+   <!--     <module>rookie-security-username-password</module>-->
        <!-- <module>rookie-security-rabc</module>-->
         <module>rookie-security-yserver</module>
     </modules>
@@ -46,6 +47,14 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>3.0.3</version>
+            </dependency>
+
             <!--            <dependency>
                             <groupId>mysql</groupId>
                             <artifactId>mysql-connector-java</artifactId>

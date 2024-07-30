@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+       Copyright 2015-2022 the original author or authors.
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+          https://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!--        全局性地开启或关闭所有映射器配置文件中已配置的任何缓存。二级缓存-->
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- 开启全局延迟加载,默认值是true -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 设置全局积极懒加载,默认值是true -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+
+
+    </settings>
+
+
+    <typeAliases>
+        <package name="com.rookie.bigdata.pojo"/>
+    </typeAliases>
+
+
+    <mappers>
+        <!--        mybatis.mapper-locations: classpath:mapper/*.xml-->
+        <mapper resource="mapper/CarMapper.xml"/>
+        <mapper resource="mapper/StudentMapper.xml"/>
+        <mapper resource="mapper/ClasszMapper.xml"/>
+        <mapper resource="mapper/UserMapper.xml"/>
+    </mappers>
+</configuration>

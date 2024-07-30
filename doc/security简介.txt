@@ -30,6 +30,21 @@ DaoAuthenticationProvider:AuthenticationProvider最常用的一个实现便是Da
 下面以官方文档上得图来解释一下整个认证得流程
 /pic/abstractauthenticationprocessingfilter.png
 
+1、当用户提交凭证的时候，AbstractAuthenticationProcessingFilter会创建一个进行身份验证的Authentication，例如：会从提交的用户和密码中创建UsernamePasswordAuthenticationToken
+2、接下来，Authentication通过AuthenticationManager进行身份验证。
+3、认证失败
+3.1、从SecurityContextHolder清除应用安全上下文SecurityContext
+3.2、RememberMeServices.loginFail被调用。如果未配置记住我，则不做任何操作
+3.3、AuthenticationFailureHandler被调用，进行认证失败的处理
+4、认证成功
+4.1、SessionAuthenticationStrategy收到新登录通知
+4.2、Authentication在SecurityContextHolder上设置，如果您需要保存，以便在将来的请求中自动设置，则必须显式调用
+4.3、RememberMeServices.loginSuccess被调用。如果未配置记住我，则不做任何操作
+4.4、ApplicationEventPublisher发布了一个InteractiveAuthenticationSuccessEvent事件
+4.5、AuthenticationSuccessHandler被调用,进行认证成功处理
+
+
+
 
 3、什么是授权
 授权 ，即访问控制，控制谁能访问哪些资源。主体进行身份认证后需要分配权限才可访问系统的资源，对于某些资源没有权限是无法访问的。这就好比学校的网站，有学生可以访问的资源，然而老师的资源学生就无法访问~
