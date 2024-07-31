@@ -1,0 +1,44 @@
+#spring:
+#  security:
+#    user:
+#      name: user
+#      password: user
+#  main:
+#    allow-bean-definition-overriding: true
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    url: jdbc:mysql://localhost:3306/oasys?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: HikariCP
+      minimum-idle: 10
+      idle-timeout: 1000
+      maximum-pool-size: 20
+mybatis:
+#  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+  ##目的是为了省略resultType里的代码量
+  type-aliases-package: com.rookie.bigdata.domain
+  #configuration:
+  #  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+#spring.datasource.url=jdbc:postgresql://ec2-13-115-58-30.ap-northeast-1.compute.amazonaws.com:5432/d1fmoseqkh7bsj?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory&autosave=conservative
+#spring.datasource.username=u8q6d1j2hgepg5
+#spring.datasource.password=pc195d7bd0b59831e858ff9814999eec0aa69f0dc7623f9d9369836458791cfe1
+#spring.datasource.driver-class-name=org.postgresql.Driver
+#
+#
+#spring.datasource.type=com.zaxxer.hikari.HikariDataSource
+#spring.datasource.hikari.minimum-idle=10
+#spring.datasource.hikari.idle-timeout=180000
+#spring.datasource.hikari.maximum-pool-size=30
+#spring.datasource.hikari.connection-timeout=10000
+#spring.datasource.hikari.pool-name=NewCRMHikariCP
+#spring.datasource.hikari.max-lifetime=1800000
