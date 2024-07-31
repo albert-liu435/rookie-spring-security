@@ -20,14 +20,14 @@
         <module>rookie-security-securitycontext</module>
 
         <module>rookie-security-sessionmanagement</module>
-<!--
-        <module>rookie-security-hello</module>
-        <module>rookie-security-jwt</module>
+        <!--
+                <module>rookie-security-hello</module>
+                <module>rookie-security-jwt</module>
 
-        <module>rookie-security-mfa</module>
-        <module>rookie-security-multichain</module>-->
-   <!--     <module>rookie-security-username-password</module>-->
-       <!-- <module>rookie-security-rabc</module>-->
+                <module>rookie-security-mfa</module>
+                <module>rookie-security-multichain</module>-->
+        <!--     <module>rookie-security-username-password</module>-->
+        <!-- <module>rookie-security-rabc</module>-->
         <module>rookie-security-yserver</module>
     </modules>
 
@@ -37,11 +37,18 @@
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <!--        <spring.boot.version>3.2.2</spring.boot.version>-->
         <spring.boot.version>3.3.1</spring.boot.version>
+
+        <mybatis.boot.version>3.0.3</mybatis.boot.version>
         <!--        <mysql.version>5.1.47</mysql.version>-->
-        <hutool.version>5.8.28</hutool.version>
-        <!--        <weixin-java-pay.version>4.0.6.B</weixin-java-pay.version>-->
+        <hutool.version>5.8.29</hutool.version>
+        <gson.version>2.11.0</gson.version>
+        <fastjson2.version>2.0.52</fastjson2.version>
+        <bcprov.jdk18on.version>1.78.1</bcprov.jdk18on.version>
+        <commons.io.version>2.16.1</commons.io.version>
+        <keytool.api.version>1.7</keytool.api.version>
+        <jjwt.api.version>0.12.6</jjwt.api.version>
+
 
     </properties>
 
@@ -59,20 +66,9 @@
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>3.0.3</version>
+                <version>${mybatis.boot.version}</version>
             </dependency>
 
-            <!--            <dependency>
-                            <groupId>mysql</groupId>
-                            <artifactId>mysql-connector-java</artifactId>
-                            <version>${mysql.version}</version>
-                        </dependency>-->
-            <!-- hutool工具类 -->
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
-            </dependency>
             <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -83,19 +79,42 @@
             <dependency>
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcprov-jdk18on</artifactId>
-                <version>1.78.1</version>
+                <version>${bcprov.jdk18on.version}</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>2.16.1</version>
+                <version>${commons.io.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>keytool-api</artifactId>
-                <version>1.7</version>
+                <version>${keytool.api.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2 -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.api.version}</version>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>
