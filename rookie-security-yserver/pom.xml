@@ -65,6 +65,11 @@
             <artifactId>hutool-all</artifactId>
       <!--      <version>${hutool.version}</version>-->
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+       <!--     <version>${gson.version}</version>-->
+        </dependency>
         <!-- https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2 -->
         <dependency>
             <groupId>com.alibaba.fastjson2</groupId>

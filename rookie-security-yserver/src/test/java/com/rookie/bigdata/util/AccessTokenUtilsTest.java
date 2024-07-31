@@ -1,7 +1,11 @@
 package com.rookie.bigdata.util;
 
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.rookie.bigdata.security.core.userdetails.CustomUserDetailsService;
-import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.ActiveProfiles;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.lang.reflect.Type;
+import java.util.Map;
+
 
 /**
  * @Class AccessTokenUtilsTest
@@ -29,21 +35,28 @@ class AccessTokenUtilsTest {
     private CustomUserDetailsService customUserDetailsService;
 
 
-
     @Test
-    void testJSON(){
+    void testJSON() {
 
         UserDetails customUserDetailsDto = customUserDetailsService.loadUserByUsername("admin");
 
-//        JSON.parseObject(JSON.toJSONString(customUserDetailsDto));
+        JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(customUserDetailsDto));
+        log.info("jsonObject:{}", jsonObject);
 
+        Gson gson = new GsonBuilder()
+                .enableComplexMapKeySerialization()
+                .serializeNulls()//序列化为null对象
+                .create();
+        Type mapType = new TypeToken<Map<String, Object>>() {
+        }.getType();
 
+        Map<String, Object> map = gson.fromJson(gson.toJson(customUserDetailsDto), mapType);
 
-
+        log.info("map:{}", map);
     }
 
     @Test
-    void testKeyHash(){
+    void testKeyHash() {
 //        Keys.hmacShaKeyFor()
     }
 
