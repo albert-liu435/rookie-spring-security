@@ -39,8 +39,10 @@ import java.security.interfaces.RSAPublicKey;
  */
 @Configuration
 @EnableWebSecurity(debug = true)
-public class SecurityConfiguration {
+public class RSAKeySecurityConfiguration {
 
+
+    //注解能直接生成 RSAPublicKey和RSAPrivateKey 参考 org.springframework.security.converter.RsaKeyConverters
     @Value("${jwt.public.key}")
     RSAPublicKey key;
 
@@ -61,6 +63,7 @@ public class SecurityConfiguration {
                 .oauth2ResourceServer((oAuth2ResourceServerConfigurer) -> oAuth2ResourceServerConfigurer
                         .jwt(Customizer.withDefaults())
                 )
+                .formLogin(Customizer.withDefaults())
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling((exceptions) -> exceptions
                         .authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())

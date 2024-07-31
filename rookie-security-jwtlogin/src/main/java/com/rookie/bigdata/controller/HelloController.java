@@ -36,4 +36,10 @@ public class HelloController {
 		return "Hello, " + authentication.getName() + "!";
 	}
 
+
+	@GetMapping("/hello")
+	public String hello1(Authentication authentication) {
+		return "Hello, " + authentication.getName() + "!";
+	}
+
 }

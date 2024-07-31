@@ -34,11 +34,19 @@ import java.util.stream.Collectors;
  * @author Josh Cummings
  */
 @RestController
-public class TokenController {
+public class RSAKeyTokenController {
 
 	@Autowired
 	JwtEncoder encoder;
 
+	/**
+	 * http请求：http://localhost:8888/token
+	 * basic auth: user:password
+	 * 获取到token之后 可以进行 http://localhost:8888/hello
+	 * Authorization=Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlciIsImV4cCI6MTcyMjQ1MTMyNywiaWF0IjoxNzIyNDE1MzI3LCJzY29wZSI6ImFwcCJ9.GXT2Ag1DMBOWtjdSD8E50ZxR6b791CeP3C3RTf0UZ3ISMoUepI5LsOKU2NEj4YdUJPG046yA0QxTyjjiscw4pBBG-xZ9lshjPgsIAbn-zpmRgumQER751Un075nMg9wdmJWo6NZdarwTnwcnOkyE3m-YTFYH0W9horNIly1DXo5ZaBYivm-kg7VUlI_ro5oAdzXBo0X-caBozAenSXofIkiHuKxb3kNER45evVHmGoq8lcXvy2dLwo4wLuBXetMj1f3hiTbjJ5kmfhSK3jW1P93l3RiIXEuMjetqWoxU6XnDwb5SK6TBTWbJRayaIP3AlGL8FnQc9mCs-sg_5p-ZjA
+	 * @param authentication
+	 * @return
+	 */
 	@PostMapping("/token")
 	public String token(Authentication authentication) {
 		Instant now = Instant.now();

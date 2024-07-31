@@ -1,9 +1,9 @@
 package com.rookie.bigdata;
 
 
-import com.rookie.bigdata.config.SecurityConfiguration;
+import com.rookie.bigdata.config.RSAKeySecurityConfiguration;
 import com.rookie.bigdata.controller.HelloController;
-import com.rookie.bigdata.controller.TokenController;
+import com.rookie.bigdata.controller.RSAKeyTokenController;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +25,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @Date 2024/6/26 21:11
  * @Version 1.0
  */
-@WebMvcTest({ HelloController.class, TokenController.class })
-@Import(SecurityConfiguration.class)
-public class HelloControllerTests {
+@WebMvcTest({ HelloController.class, RSAKeyTokenController.class })
+@Import(RSAKeySecurityConfiguration.class)
+public class RSAKeyTokenControllerTests {
 
     @Autowired
     MockMvc mvc;

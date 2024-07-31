@@ -34,11 +34,11 @@ public class JwtLoginApplication extends SpringBootServletInitializer implements
 
     @Override
     public void run(String... args) throws Exception {
-        String[] beans = appContext.getBeanDefinitionNames();
-        Arrays.sort(beans);
-        for (String bean : beans) {
-            System.out.println(bean + " of Type :: " + appContext.getBean(bean).getClass());
-        }
+//        String[] beans = appContext.getBeanDefinitionNames();
+//        Arrays.sort(beans);
+//        for (String bean : beans) {
+//            System.out.println(bean + " of Type :: " + appContext.getBean(bean).getClass());
+//        }
     }
 
 }

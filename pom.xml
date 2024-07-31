@@ -13,13 +13,17 @@
         <module>rookie-security-authentication</module>
         <module>rookie-security-encrypt</module>
         <module>rookie-security-formlogin</module>
+
+
+        <module>rookie-security-jwtlogin</module>
+
         <module>rookie-security-securitycontext</module>
 
         <module>rookie-security-sessionmanagement</module>
 <!--
         <module>rookie-security-hello</module>
         <module>rookie-security-jwt</module>
-        <module>rookie-security-jwtlogin</module>
+
         <module>rookie-security-mfa</module>
         <module>rookie-security-multichain</module>-->
    <!--     <module>rookie-security-username-password</module>-->
