@@ -14,6 +14,8 @@ import org.springframework.security.config.annotation.web.configurers.FormLoginC
 public class FormLoginConfigurerCustomizer implements Customizer<FormLoginConfigurer<HttpSecurity>> {
     @Override
     public void customize(FormLoginConfigurer<HttpSecurity> httpSecurityFormLoginConfigurer) {
+
+
         httpSecurityFormLoginConfigurer
                 //登录页面，可以根据自己得需要进行不同得设置，默认为/login,在AbstractAuthenticationFilterConfigurer得构造方法中设置
                 .loginPage("/login")

@@ -1,0 +1,57 @@
+https://springdoc.cn/dynamic-authority-in-new-spring-security/
+
+https://zhuanlan.zhihu.com/p/709020441
+https://blog.51cto.com/u_16213615/9474339
+https://blog.51cto.com/u_16213563/10958662
+
+@Bean
+SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http.authorizeHttpRequests(register -> register.anyRequest().access((authentication, object) -> {
+                //表示请求的 URL 地址和数据库的地址是否匹配上了
+                boolean isMatch = false;
+                //获取当前请求的 URL 地址
+                String requestURI = object.getRequest().getRequestURI();
+                List<MenuWithRoleVO> menuWithRole = menuService.getMenuWithRole();
+                for (MenuWithRoleVO m : menuWithRole) {
+                    if (antPathMatcher.match(m.getUrl(), requestURI)) {
+                        isMatch = true;
+                        //说明找到了请求的地址了
+                        //这就是当前请求需要的角色
+                        List<Role> roles = m.getRoles();
+                        //获取当前登录用户的角色
+                        Collection<? extends GrantedAuthority> authorities = authentication.get().getAuthorities();
+                        for (GrantedAuthority authority : authorities) {
+                            for (Role role : roles) {
+                                if (authority.getAuthority().equals(role.getName())) {
+                                    //说明当前登录用户具备当前请求所需要的角色
+                                    return new AuthorizationDecision(true);
+                                }
+                            }
+                        }
+                    }
+                }
+                if (!isMatch) {
+                    //说明请求的 URL 地址和数据库的地址没有匹配上，对于这种请求，统一只要登录就能访问
+                    if (authentication.get() instanceof AnonymousAuthenticationToken) {
+                        return new AuthorizationDecision(false);
+                    } else {
+                        //说明用户已经认证了
+                        return new AuthorizationDecision(true);
+                    }
+                }
+                return new AuthorizationDecision(false);
+            }))
+            .formLogin(form ->
+            //...
+            )
+            .csrf(csrf ->
+            //...
+            )
+            .exceptionHandling(e ->
+            //...
+            )
+            .logout(logout ->
+            //...
+            );
+    return http.build();
+}
