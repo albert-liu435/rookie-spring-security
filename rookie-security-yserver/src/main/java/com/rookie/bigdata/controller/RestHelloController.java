@@ -14,27 +14,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RestHelloController {
 
-
-    @RequestMapping("/code")
-    public String hello() {
-        return "code";
+    /**
+     * http://locahost:8888/private
+     * @return
+     */
+    @RequestMapping("/private")
+    public String privateSource() {
+        return "private";
     }
 
-    @RequestMapping("/test")
-    public String test() {
-        return "test";
-    }
+//
+//
+//
+//    @RequestMapping("/code")
+//    public String hello() {
+//
+//
+//        return "code";
+//    }
+//
+//    @RequestMapping("/test")
+//    public String test() {
+//        return "test";
+//    }
 
 
-    @RequestMapping("/app/hello")
-    public String appHello(){
-
-        return "appHello";
-    }
-
-    @RequestMapping("/web/hello")
-    public String webHello(){
-
-        return "webHello";
-    }
 }

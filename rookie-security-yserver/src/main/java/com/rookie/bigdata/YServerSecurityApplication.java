@@ -1,5 +1,6 @@
 package com.rookie.bigdata;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,25 +9,26 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 
-import java.util.Arrays;
-
 /**
  * @Author rookie
  * @Description Hello Security application.
  * @Date 2024/6/26 21:10
  * @Version 1.0
  */
+
+//
 @SpringBootApplication
-public class ServerSecurityApplication extends SpringBootServletInitializer implements CommandLineRunner {
+@MapperScan("com.rookie.bigdata.mapper")
+public class YServerSecurityApplication extends SpringBootServletInitializer implements CommandLineRunner {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(ServerSecurityApplication.class, args);
+        SpringApplication.run(YServerSecurityApplication.class, args);
     }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(ServerSecurityApplication.class);
+        return application.sources(YServerSecurityApplication.class);
     }
 
     @Autowired

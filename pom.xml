@@ -14,7 +14,7 @@
         <module>rookie-security-encrypt</module>
         <module>rookie-security-formlogin</module>
 
-
+        <module>rookie-security-jwt</module>
         <module>rookie-security-jwtlogin</module>
 
         <module>rookie-security-securitycontext</module>
