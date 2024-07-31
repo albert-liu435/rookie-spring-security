@@ -1,17 +1,13 @@
 package com.rookie.bigdata.security;
 
-import com.rookie.bigdata.security.config.SecurityContextConfigurerCustomizer;
-import com.rookie.bigdata.security.core.context.MyThreadLocalSecurityContextHolderStrategy;
-import com.rookie.bigdata.security.web.authentication.www.MyBasicAuthenticationEntryPoint;
+
 import com.rookie.bigdata.security.web.context.MySecurityContextRepository;
 import com.rookie.bigdata.security.web.context.MySecurityContextSaveFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.SecurityContextConfigurer;
-import org.springframework.security.core.context.SecurityContextHolderStrategy;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -53,13 +49,24 @@ public class SecurityContextSecurityConfiguration {
 
                 //配置安全上下文持久化
 //                .securityContext(new SecurityContextConfigurerCustomizer()
+
+//                .securityContext((securityContext) ->
+//                        securityContext
+//                                .securityContextRepository(new RequestAttributeSecurityContextRepository()))
+//                .securityContext((securityContext) -> securityContext
+//                        .securityContextRepository(new DelegatingSecurityContextRepository(
+//                                new RequestAttributeSecurityContextRepository(),
+//                                new HttpSessionSecurityContextRepository()
+//                        )))
                 .securityContext((httpSecuritySecurityContextConfigurer -> {
 
                     SecurityContextRepository securityContextRepository = new DelegatingSecurityContextRepository(
                             new RequestAttributeSecurityContextRepository(), new HttpSessionSecurityContextRepository(), MySecurityContextRepository());
 
                     httpSecuritySecurityContextConfigurer
-                            .securityContextRepository(securityContextRepository);
+                            .securityContextRepository(securityContextRepository)
+                            //由于SecurityContextPersistenceFilter已经废弃，这里设置为true表示使用SecurityContextHolderFilter过滤器，如果不进行设置，默认也为true
+                            .requireExplicitSave(true);
                 }))
 
                 .addFilterAfter(new MySecurityContextSaveFilter(MySecurityContextRepository()), AuthorizationFilter.class)

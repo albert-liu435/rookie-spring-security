@@ -1,0 +1,7 @@
+SecurityContextHolderFilter
+
+SecurityContextHolderFilter通过SecurityContextConfigurer进行配置
+
+SecurityContextConfigurer
+
+SecurityContextHolderFilter

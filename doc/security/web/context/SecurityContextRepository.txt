@@ -62,12 +62,14 @@ public interface SecurityContextRepository {
 }
 
 
+SecurityContextRepository的默认实现类为DelegatingSecurityContextRepository，里面封装了HttpSessionSecurityContextRepository和RequestAttributeSecurityContextRepository
+
 
 
 实现类有DelegatingSecurityContextRepository,HttpSessionSecurityContextRepository，NullSecurityContextRepository
 
 DelegatingSecurityContextRepository:是一个委托类，里面可以封装多个SecurityContextRepository
-HttpSessionSecurityContextRepository ：从session中获取context，保证同一个session用到的都是同一个context。传统的session类型的web应用应该使用这个方式来保存context。
+HttpSessionSecurityContextRepository ：用于将SecurityContext与http session关联起来，从session中获取context，保证同一个session用到的都是同一个context。传统的session类型的web应用应该使用这个方式来保存context。
 NullSecurityContextRepository ：新建一个。适用于无状态的应用，比如使用JWT
 RequestAttributeSecurityContextRepository ：从Requst的Attribute恢复出context SecurityContextHolderFilter对应旧版本的SecurityContextPersistenceFilter （已经弃用）。
 
@@ -76,3 +78,4 @@ RequestAttributeSecurityContextRepository ：从Requst的Attribute恢复出conte
 参考：https://blog.csdn.net/weixin_57128596/article/details/126844394
 https://zhuanlan.zhihu.com/p/539320505
 https://blog.csdn.net/sanjun333/article/details/125353212
+https://docs.spring.io/spring-security/reference/servlet/authentication/persistence.html
