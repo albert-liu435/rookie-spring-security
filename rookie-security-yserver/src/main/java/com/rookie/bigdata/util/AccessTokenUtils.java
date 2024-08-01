@@ -1,10 +1,20 @@
 package com.rookie.bigdata.util;
 
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.TypeReference;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.rookie.bigdata.domain.dto.CustomUserDetailsDto;
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.io.DeserializationException;
+import io.jsonwebtoken.io.Deserializer;
 import io.jsonwebtoken.lang.Classes;
 import io.jsonwebtoken.security.Keys;
 
+import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -34,12 +44,69 @@ public class AccessTokenUtils {
      */
     private static final String ISSUER = "rookie";
 
+    static Gson gson = new GsonBuilder()
+            .enableComplexMapKeySerialization()
+            .serializeNulls()//序列化为null对象
+            .create();
+
 
     private AccessTokenUtils() {
     }
 
 
-    //TODO
+    //
+
+    public static String getSubject(String jwt) {
+        return claims(jwt).getSubject();
+    }
+
+
+    public static String create(CustomUserDetailsDto customUserDetailsDto) {
+        customUserDetailsDto.setPassword("[PROTECTED]");
+
+        Type mapType = new TypeToken<Map<String, Object>>() {
+        }.getType();
+
+        Map<String, Object> map = gson.fromJson(gson.toJson(customUserDetailsDto), mapType);
+
+        return Jwts.builder()
+//                .setClaims(JSON.parseObject(JSON.toJSONString(customUserDetailsDto)))
+                .setClaims(map)
+                .setSubject(customUserDetailsDto.getName())
+                .setIssuedAt(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
+                .setIssuer(ISSUER)
+                .signWith(Keys.hmacShaKeyFor(SECRET.getBytes()), SignatureAlgorithm.HS512)
+//                .serializeToJsonWith(map -> JSON.toJSONBytes(map))
+                .serializeToJsonWith(mapJson -> gson.toJson(mapJson).getBytes(StandardCharsets.UTF_8))
+                .compact();
+    }
+
+
+    public static CustomUserDetailsDto getCustomUserDetails(String jwt) {
+
+        String toJson = gson.toJson(claims(jwt));
+        CustomUserDetailsDto customUserDetailsDto = gson.fromJson(toJson, CustomUserDetailsDto.class);
+        return customUserDetailsDto;
+
+//        return JSON.parseObject(JSON.toJSONString(claims(jwt)), CustomUserDetailsDto.class);
+    }
+
+    private static Claims claims(String jwt) {
+
+        Type mapType = new TypeToken<Map<String, Object>>() {
+        }.getType();
+
+//        Map<String, Object> map = gson.fromJson(new String(bytes), mapType);
+
+        return Jwts.parserBuilder()
+                .setSigningKey(Keys.hmacShaKeyFor(SECRET.getBytes()))
+//                .deserializeJsonWith(bytes -> JSONObject.parseObject(new String(bytes), new TypeReference<Map<String, Object>>() {
+//                }))
+                .deserializeJsonWith(bytes -> gson.fromJson(new String(bytes), mapType))
+                .build()
+                .parseClaimsJws(jwt)
+                .getBody();
+    }
 
 //    public static String getSubject(String jwt) {
 //        return claims(jwt).getSubject();
@@ -63,15 +130,15 @@ public class AccessTokenUtils {
 //        return JSON.parseObject(JSON.toJSONString(claims(jwt)), CustomUserDetailsDto.class);
 //    }
 //
-//    private static Claims claims(String jwt) {
-//        return Jwts.parser()
-//                .setSigningKey(Keys.hmacShaKeyFor(SECRET.getBytes()))
-//                .deserializeJsonWith(bytes -> JSONObject.parseObject(new String(bytes), new TypeReference<Map<String, Object>>() {
-//                }))
-//                .build()
-//                .parseClaimsJws(jwt)
-//                .getBody();
-//    }
+//private static Claims claims(String jwt) {
+//    return Jwts.parserBuilder()
+//            .setSigningKey(Keys.hmacShaKeyFor(SECRET.getBytes()))
+//            .deserializeJsonWith(bytes -> JSONObject.parseObject(new String(bytes), new TypeReference<Map<String, Object>>() {
+//            }))
+//            .build()
+//            .parseClaimsJws(jwt)
+//            .getBody();
+//}
 
 
 }

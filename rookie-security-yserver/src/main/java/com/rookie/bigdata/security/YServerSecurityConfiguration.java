@@ -1,12 +1,16 @@
 package com.rookie.bigdata.security;
 
+import com.rookie.bigdata.security.access.CustomAccessDeniedHandler;
+import com.rookie.bigdata.security.web.CustomAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -22,50 +26,45 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class YServerSecurityConfiguration {
 
 
-//    @Bean
-//    public static MyInitializeUserDetailsBeanManagerConfigurer initializeMyUserDetailsBeanManagerConfigurer(
-//            ApplicationContext context) {
-//        return new MyInitializeUserDetailsBeanManagerConfigurer(context);
-//    }
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((authorize) -> authorize
-                        .anyRequest().authenticated()
-                )
-                .httpBasic(withDefaults())
-                .formLogin(withDefaults())
-
-
-//                .formLogin(new FormLoginConfigurerCustomizer())
-//                .formLogin(httpFormLogin -> {
-//                    httpFormLogin
-//                            .loginPage("/login")
-//                            //默认为username password,可以在这里进行修改
-//                            .usernameParameter("username")
-//                            .passwordParameter("password");
+//        .csrf((csrf) -> {
+//                    csrf.ignoringRequestMatchers(LOGIN_URI, REGISTER_URI)
+//                            .csrfTokenRepository(csrfTokenRedisRepository)
+////                    .csrfTokenRequestHandler(requestHandler)
+//                    ;
 //                })
-//                .rememberMe(withDefaults())
-        ;
+                .csrf(withDefaults())
 
 
-//                        .authorizeHttpRequests((authorize) -> authorize
-//                .anyRequest().authenticated()
-//        )
-//                .csrf((csrf) -> csrf.ignoringRequestMatchers("/token"))
-//                .httpBasic(Customizer.withDefaults())
-////                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-////                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt(Customizer.withDefaults()))
-//                .oauth2ResourceServer((oAuth2ResourceServerConfigurer) -> oAuth2ResourceServerConfigurer
-//                        .jwt(Customizer.withDefaults())
+//                .authorizeRequests((authorizeRequests) ->
+//                        authorizeRequests
+//                                .requestMatchers("/auth/**").permitAll()
+//                                .anyRequest().authenticated()
+//                                .withObjectPostProcessor(new FilterSecurityInterceptorPostProcessor(accessDecisionManager, securityMetadataSource))
 //                )
-//                .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .exceptionHandling((exceptions) -> exceptions
-//                        .authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
-//                        .accessDeniedHandler(new BearerTokenAccessDeniedHandler())
-//                );
+
+                .authorizeHttpRequests((authorize) ->
+                        authorize
+                                .requestMatchers("/auth/**").permitAll()
+                                .anyRequest().authenticated()
+                )
+                .sessionManagement((sessionManagement) ->
+                        sessionManagement
+                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+
+//                .addFilterAt(new JWTAuthenticationFilter(authenticationManager(), redisService), UsernamePasswordAuthenticationFilter.class)
+//                .addFilterAfter(new JWTAuthorizationFilter(redisService), JWTAuthenticationFilter.class)
+
+                //异常处理: 处理 AccessDeniedException 和 AuthenticationException
+                .exceptionHandling(exceptionHandler ->
+                        exceptionHandler
+                                .accessDeniedHandler(new CustomAccessDeniedHandler())
+                                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+                );
+
 
         return http.build();
     }
@@ -83,13 +82,4 @@ public class YServerSecurityConfiguration {
     }
 
 
-//    @Bean
-//    public InMemoryUserDetailsManager userDetailsService() {
-//        UserDetails user = User.withDefaultPasswordEncoder()
-//                .username("user")
-//                .password("password")
-//                .roles("USER")
-//                .build();
-//        return new InMemoryUserDetailsManager(user);
-//    }
 }

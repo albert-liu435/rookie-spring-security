@@ -15,28 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class RestHelloController {
 
     /**
-     * http://locahost:8888/private
+     * http://localhost:8888/private
      * @return
      */
     @RequestMapping("/private")
     public String privateSource() {
         return "private";
     }
-
-//
-//
-//
-//    @RequestMapping("/code")
-//    public String hello() {
-//
-//
-//        return "code";
-//    }
-//
-//    @RequestMapping("/test")
-//    public String test() {
-//        return "test";
-//    }
 
 
 }

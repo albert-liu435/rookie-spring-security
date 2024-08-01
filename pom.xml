@@ -47,6 +47,7 @@
         <fastjson2.version>2.0.52</fastjson2.version>
         <bcprov.jdk18on.version>1.78.1</bcprov.jdk18on.version>
         <commons.io.version>2.16.1</commons.io.version>
+        <commons.lang3.version>3.15.0</commons.lang3.version>
         <keytool.api.version>1.7</keytool.api.version>
         <jjwt.api.version>0.12.6</jjwt.api.version>
 
@@ -93,6 +94,13 @@
                 <artifactId>commons-io</artifactId>
                 <version>${commons.io.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>keytool-api</artifactId>
@@ -117,16 +125,7 @@
                 <artifactId>fastjson2</artifactId>
                 <version>${fastjson2.version}</version>
             </dependency>
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt</artifactId>
-                <version>${jjwt.api.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt-api</artifactId>
-                <version>${jjwt.api.version}</version>
-            </dependency>
+
         </dependencies>
 
     </dependencyManagement>

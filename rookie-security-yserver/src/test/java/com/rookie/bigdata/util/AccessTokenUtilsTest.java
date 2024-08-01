@@ -5,6 +5,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.rookie.bigdata.domain.dto.CustomUserDetailsDto;
 import com.rookie.bigdata.security.core.userdetails.CustomUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -56,7 +57,31 @@ class AccessTokenUtilsTest {
     }
 
     @Test
-    void testKeyHash() {
+    void testBytes(){
+        UserDetails customUserDetailsDto = customUserDetailsService.loadUserByUsername("admin");
+
+        Gson gson = new GsonBuilder()
+                .enableComplexMapKeySerialization()
+                .serializeNulls()//序列化为null对象
+                .create();
+
+        Type mapType = new TypeToken<Map<String, Object>>() {
+        }.getType();
+
+        Map<String, Object> map = gson.fromJson(gson.toJson(customUserDetailsDto), mapType);
+        String s = gson.toJson(map);
+        log.info("map:{}",s);
+    }
+
+    @Test
+    void testCreate() {
+        UserDetails customUserDetailsDto = customUserDetailsService.loadUserByUsername("admin");
+
+        String s = AccessTokenUtils.create((CustomUserDetailsDto) customUserDetailsDto);
+        log.info("token:{}",s);
+
+        CustomUserDetailsDto customUserDetails = AccessTokenUtils.getCustomUserDetails(s);
+        log.info("customUserDetails:{}",customUserDetails);
 //        Keys.hmacShaKeyFor()
     }
 
