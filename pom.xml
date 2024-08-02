@@ -12,6 +12,7 @@
 
         <module>rookie-security-authentication</module>
         <module>rookie-security-authorization</module>
+        <module>rookie-security-authorizationmethod</module>
         <module>rookie-security-encrypt</module>
         <module>rookie-security-formlogin</module>
 
