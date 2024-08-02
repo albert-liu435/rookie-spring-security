@@ -48,6 +48,12 @@ DaoAuthenticationProvider:AuthenticationProvider最常用的一个实现便是Da
 
 3、什么是授权
 授权 ，即访问控制，控制谁能访问哪些资源。主体进行身份认证后需要分配权限才可访问系统的资源，对于某些资源没有权限是无法访问的。这就好比学校的网站，有学生可以访问的资源，然而老师的资源学生就无法访问~
+我们看一下官方的授权流程图 authorizationfilter.png
+1、首先，AuthorizationFilter 从SecurityContextHolder获取 Supplier<Authentication>
+2、将Supplier<Authentication>和HttpServletRequest传递给AuthorizationManager,AuthorizationManager进行匹配请求默认为RequestMatcherDelegatingAuthorizationManager，然后运行验证规则
+2.1、认证失败,发布AuthorizationDeniedEvent事件并抛出AccessDeniedException异常，最终由ExceptionTranslationFilter处理AccessDeniedException异常
+2.2、认证成功,发布AuthorizationGrantedEvent事件，AuthorizationFilter会正常进入到下一个过滤器
+
 
 参考：
 https://baijiahao.baidu.com/s?id=1711889305762686065&wfr=spider&for=pc

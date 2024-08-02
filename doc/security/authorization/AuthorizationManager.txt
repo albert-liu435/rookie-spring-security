@@ -1,0 +1,26 @@
+AuthorizationManager
+用来检查当前认证信息Authentication是否可以访问特定对象T。AuthorizationManager将访问决策抽象更加泛化
+
+@FunctionalInterface
+public interface AuthorizationManager<T> {
+
+	/**
+	 * 用来决定是否允许进入特定的对象T
+	 */
+	default void verify(Supplier<Authentication> authentication, T object) {
+		AuthorizationDecision decision = check(authentication, object);
+		 // 授权决策没有经过允许就403
+		if (decision != null && !decision.isGranted()) {
+
+			throw new AccessDeniedException("Access Denied");
+		}
+	}
+
+	/**
+	 * 钩子方法，用来检查是否有权限进入特定的对象
+	 */
+	@Nullable
+	AuthorizationDecision check(Supplier<Authentication> authentication, T object);
+
+}
+我们只需要实现钩子方法check就可以了，它将当前提供的认证信息authentication和泛化对象T进行权限检查，并返回AuthorizationDecision，AuthorizationDecision.isGranted将决定是否能够访问当前资源

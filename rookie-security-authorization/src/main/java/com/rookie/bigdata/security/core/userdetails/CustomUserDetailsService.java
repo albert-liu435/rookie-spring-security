@@ -18,13 +18,17 @@ import java.util.Optional;
  * @Date 2024/7/30 15:21
  * @Version 1.0
  */
-@Service
+//@Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     private static final String USERNAME_NOT_FOUND_MESSAGE = "User with name (%s) not exists.";
 
-    @Autowired
+//    @Autowired
     private UserMapper userMapper;
+
+    public CustomUserDetailsService(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

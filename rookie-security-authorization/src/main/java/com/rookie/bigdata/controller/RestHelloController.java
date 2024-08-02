@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RestHelloController {
 
     /**
-     * http://locahost:8888/private
+     * http://locahost:8080/private
      * @return
      */
     @RequestMapping("/private")

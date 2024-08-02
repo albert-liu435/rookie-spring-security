@@ -55,3 +55,10 @@ SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             );
     return http.build();
 }
+
+
+https://www.51cto.com/article/700197.html
+
+
+基于配置
+为了使用AuthorizationManager，引入了相关配置是AuthorizeHttpRequestsConfigurer，这个配置类非常类似于第九章中的基于表达式的访问控制。
