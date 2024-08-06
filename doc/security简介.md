@@ -1,12 +1,12 @@
+## security简介
+
 Spring Security是一个面向Java应用程序框架，并且提供身份验证、授权和防御常见攻击的强大权限管理框架。对Spring Security进行开发依赖于spring框架。
 在Spring Security中，权限管理主要包括两个方面：认证和授权。简单来说，认证就是用户的登录认证；授权就是登录成功之后，用户可以访问资源的多少。
 什么是权限管理
 基本上涉及到用户参与的系统都要进行权限管理，权限管理属于系统安全的范畴，权限管理实现对用户访问系统的控制 ，按照安全规则 或者 安全策略控制用户 可以访问而且只能访问自己被授权的资源。权限管理包括用户身份认证和授权两部分，简称认证授权。对于需要访问控制的资源用户首先经过身份认证，认证通过后用户具有该资源的访问权限才可访问。
 
+### 认证
 
-
-
-2、认证
 认证 ，就是判断⼀个用户是否为合法用户的处理过程。最常用的简单身份认证方式是系统通过核对用户输入的用户名和口令（密码），看其是否与系统中存储的该用户的用户名和口令⼀致，来判断用户身份是否正确。这就好比我们登录QQ、微信、游戏账号等等需要的账号和密码~
 
 在spring security认证中使用到的组件主要如下
@@ -18,7 +18,7 @@ Authentication：鉴权对象，该对象主要包含了用户的详细信息（
 
 GrantedAuthority：该接口表示了当前用户所拥有的权限（或者角色）信息。这些信息有授权负责对象AccessDecisionManager来使用，并决定最终用户是否可以访问某资源（URL或方法调用或域对象）。鉴权时并不会使用到该对象。
 
-关系如图：pic/securitycontextholder.png
+![securitycontextholder](pic/security简介/securitycontextholder.png)
 
 UserDetails：这个接口规范了用户详细信息所拥有的字段，譬如用户名、密码、账号是否过期、是否锁定等。在Spring Security中，获取当前登录的用户的信息,一般情况是需要在这个接口上面进行扩展，用来对接自己系统的用户UserDetailsService这个接口只提供一个接口loadUserByUsername(String username)，这个接口非常重要，一般情况我们都是通过扩展这个接口来显示获取我们的用户信息，用户登录时传递的用户名和密码也是通过这里这查找出来的用户名和密码进行校验，但是真正的校验不在这里，而是由AuthenticationManager以及AuthenticationProvider负责的，需要强调的是，如果用户不存在，不应返回NULL，而要抛出异常UsernameNotFoundException
 
@@ -28,7 +28,10 @@ DaoAuthenticationProvider:AuthenticationProvider最常用的一个实现便是Da
 参考图片:pic/providermanagers-parent.png
 
 下面以官方文档上得图来解释一下整个认证得流程
-/pic/abstractauthenticationprocessingfilter.png
+
+![abstractauthenticationprocessingfilter](pic/security简介/abstractauthenticationprocessingfilter.png)
+
+
 
 1、当用户提交凭证的时候，AbstractAuthenticationProcessingFilter会创建一个进行身份验证的Authentication，例如：会从提交的用户和密码中创建UsernamePasswordAuthenticationToken
 2、接下来，Authentication通过AuthenticationManager进行身份验证。
@@ -43,18 +46,31 @@ DaoAuthenticationProvider:AuthenticationProvider最常用的一个实现便是Da
 4.4、ApplicationEventPublisher发布了一个InteractiveAuthenticationSuccessEvent事件
 4.5、AuthenticationSuccessHandler被调用,进行认证成功处理
 
+### 授权
 
-
-
-3、什么是授权
 授权 ，即访问控制，控制谁能访问哪些资源。主体进行身份认证后需要分配权限才可访问系统的资源，对于某些资源没有权限是无法访问的。这就好比学校的网站，有学生可以访问的资源，然而老师的资源学生就无法访问~
-我们看一下官方的授权流程图 authorizationfilter.png
+我们看一下官方的授权流程图 
+
+![authorizationfilter](pic/security简介/authorizationfilter.png)
+
 1、首先，AuthorizationFilter 从SecurityContextHolder获取 Supplier<Authentication>
 2、将Supplier<Authentication>和HttpServletRequest传递给AuthorizationManager,AuthorizationManager进行匹配请求默认为RequestMatcherDelegatingAuthorizationManager，然后运行验证规则
 2.1、认证失败,发布AuthorizationDeniedEvent事件并抛出AccessDeniedException异常，最终由ExceptionTranslationFilter处理AccessDeniedException异常
 2.2、认证成功,发布AuthorizationGrantedEvent事件，AuthorizationFilter会正常进入到下一个过滤器
 
 
-参考：
-https://baijiahao.baidu.com/s?id=1711889305762686065&wfr=spider&for=pc
+
+参考：[spring security系列一：核心组件](https://baijiahao.baidu.com/s?id=1711889305762686065&wfr=spider&for=pc)
+
+
+
+
+
+
+
+
+
+
+
+
 
