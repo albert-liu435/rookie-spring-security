@@ -117,6 +117,6 @@ public class SecurityConfiguration {
 
 主要用来添加 HTTP basic的认证方式，用于验证用户是否合法，通过HttpBasicConfigurer进行构建BasicAuthenticationFilter。
 
-[详情可参考](../authentication/www/BasicAuthenticationFilter.md)
+[详情可参考](../../../../BasicAuthenticationFilter.md)
 
 参考：[[Spring Security 多过滤链的使用](https://segmentfault.com/a/1190000040346944)

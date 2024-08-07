@@ -1,0 +1,3 @@
+HeaderWriterFilter
+
+HeaderWriterFilter字面理解为请求头写入过滤器，他的作用是将某些头信息添加到响应中，添加某些启用浏览器保护的头信息非常有用，如X-Frame-Options、X-XSS-Protection、X-Content-Type-Options等，增加一些安全性。逻辑也比较简单，就是添加头部信息
