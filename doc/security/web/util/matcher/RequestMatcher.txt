@@ -1,0 +1,6 @@
+RequestMatcher
+RequestMatcher策略接口，用于匹配HttpServletRequest是否成功
+
+
+OrRequestMatcher:里面封装了RequestMatcher集合，在匹配的时候，遍历集合，只要任何一个匹配成功就返回true
+AndRequestMatcher:里面封装了RequestMatcher集合，在匹配的时候，遍历集合，只有集合中所有的匹配成功才返回true

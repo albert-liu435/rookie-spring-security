@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.KeyFactory;
 import java.security.KeyStore;
+import java.security.PublicKey;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
@@ -55,6 +56,8 @@ class SecurityConfigurationTest {
         KeyFactory kf = KeyFactory.getInstance("RSA");
         RSAPrivateKey rsaPrivateKey = (RSAPrivateKey) kf.generatePrivate(
                 new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privateKey)));
+        PublicKey publicKey = kf.generatePublic(new PKCS8EncodedKeySpec(rsaPrivateKey.getEncoded()));
+
     }
 
 
