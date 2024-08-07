@@ -20,8 +20,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.AuthorizationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.encrypt.AesBytesEncryptor;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -58,6 +60,13 @@ public class SecurityConfig {
                         .successHandler(mfaAuthenticationHandler)
                         .failureHandler(mfaAuthenticationHandler)
                 )
+//                .formLogin(new Customizer<FormLoginConfigurer<HttpSecurity>>() {
+//                    @Override
+//                    public void customize(FormLoginConfigurer<HttpSecurity> httpSecurityFormLoginConfigurer) {
+//                        httpSecurityFormLoginConfigurer.successHandler()
+//                                .failureHandler();
+//                    }
+//                })
                 .exceptionHandling((exceptions) -> exceptions
                         .withObjectPostProcessor(new ObjectPostProcessor<ExceptionTranslationFilter>() {
                             @Override

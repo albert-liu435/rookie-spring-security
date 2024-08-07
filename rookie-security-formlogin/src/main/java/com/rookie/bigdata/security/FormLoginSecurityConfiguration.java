@@ -1,6 +1,5 @@
 package com.rookie.bigdata.security;
 
-import com.rookie.bigdata.security.config.FormLoginConfigurerCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -34,15 +33,16 @@ public class FormLoginSecurityConfiguration {
                         .anyRequest().authenticated()
                 )
                 .httpBasic(withDefaults())
+                .formLogin(withDefaults())
 //                .formLogin(new FormLoginConfigurerCustomizer())
-                .formLogin(httpFormLogin -> {
-                    httpFormLogin
-                            .loginPage("/login")
-                            //默认为username password,可以在这里进行修改
-                            .usernameParameter("username")
-                            .passwordParameter("password");
-                })
-                .rememberMe(withDefaults())
+//                .formLogin(httpFormLogin -> {
+//                    httpFormLogin
+//                            .loginPage("/login")
+//                            //默认为username password,可以在这里进行修改
+//                            .usernameParameter("username")
+//                            .passwordParameter("password");
+//                })
+//                .rememberMe(withDefaults())
         ;
 
 
